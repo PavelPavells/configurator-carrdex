@@ -1,0 +1,104 @@
+.wrapper-top-block__barrier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //border: 1px solid black;
+    height: 65vh;
+    width: 100%;
+    padding: 10px;
+    .block {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 85%;
+        height: 100%;
+        padding-bottom: 10px;
+        .wrapper-top__block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            //margin-right: 10px;
+            border: 1px solid black;
+            &:hover {
+                transform: translateY(-2px);
+                transition: all 0.2s ease-in-out;
+                //box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+            }
+            
+            .top-block__photo {
+                width: 150px;
+                height: 150px;
+                //background: url("../Image/top-left.png") no-repeat;
+                //margin-bottom: 30px;
+            }
+            .top-block__description {
+              font-size: 13px;
+                //width: 70%;
+            }
+        }
+        .wrapper-bottom__block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            //max-width: 355px;
+            height: 100%;
+            border: 1px solid black;
+            &:hover {
+                transform: translateY(-2px);
+                transition: all 0.2s ease-in-out;
+                //box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+            }
+            .bottom-block__photo {
+                width: 110px;
+                height: 150px;
+                //background: url("../Image/top-right.png") no-repeat;
+                //margin-bottom: 30px;
+            }
+            .bottom-block__description {
+              font-size: 13px;
+                //width: 70%;
+            }
+        }
+    }
+}
+
+
+.opacity {
+    display: none;
+    opacity: 0.5;
+}
+.open-barrier {
+    display: flex;
+    //max-width: 300px;
+    box-shadow: 0px 0px 8px 5px#b2b2b2 ;
+}
+  
+  //Disabled Checkbox
+  //SETTINGS FOR CAROUSEL
+  .none {
+    opacity: 0.4;
+  }
+  .thumbs {
+    display: none
+  }
+  .carousel .slide {
+    background: #FFFFFF;
+  }
+  .carousel .carousel-status {
+    display: none;
+  }
+  .carousel .control-dots {
+    position: absolute;
+  }
+  .slide {
+    height: 230px;
+  }
+  .dot {
+    background-color: lightgrey;
+  }
