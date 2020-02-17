@@ -34,7 +34,7 @@ class Turnstille extends Component {
       error: null
     };
   }
-  
+
   componentDidMount() {
     let S = this;
 
@@ -82,29 +82,32 @@ class Turnstille extends Component {
         })
         .then(
           data => {
-            this.setState({
-              turnstile: data.data,
-              trigger: 1,
-              seria: 1, //TODO: make right
-              trigger_state: 1,
-              selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-              loadingData: true
-            }, () => {
-              let idx = 1;
-              for( let v of data.data.page_view.seria_buttons ) {
-                if ( v.state === 1 ) {
-                  S.state.seria = idx;
+            this.setState(
+              {
+                turnstile: data.data,
+                trigger: 1,
+                seria: 1, //TODO: make right
+                trigger_state: 1,
+                selectOne: data.data.page_view.module_selectors[0].state,
+                selectTwo: data.data.page_view.module_selectors[1].state,
+                selectThree: data.data.page_view.module_selectors[2].state,
+                selectFour: data.data.page_view.module_selectors[3].state,
+                selectFive: data.data.page_view.module_selectors[4].state,
+                selectSix: data.data.page_view.module_selectors[5].state,
+                selectSeven: data.data.page_view.module_selectors[6].state,
+                selectEight: data.data.page_view.module_selectors[7].state,
+                loadingData: true
+              },
+              () => {
+                let idx = 1;
+                for (let v of data.data.page_view.seria_buttons) {
+                  if (v.state === 1) {
+                    S.state.seria = idx;
+                  }
+                  idx++;
                 }
-                idx++;
               }
-          });
+            );
           },
           error => {
             this.setState({
@@ -119,29 +122,32 @@ class Turnstille extends Component {
         .get(`${site}/turnstile${window.location.search}`)
         .then(
           data => {
-            this.setState({
-              turnstile: data.data,
-              trigger: this.state.trigger,
-              ///seria: this.state.seria,
-              trigger_state: 1,
-              selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-              loadingData: true
-            }, () => {
+            this.setState(
+              {
+                turnstile: data.data,
+                trigger: this.state.trigger,
+                ///seria: this.state.seria,
+                trigger_state: 1,
+                selectOne: data.data.page_view.module_selectors[0].state,
+                selectTwo: data.data.page_view.module_selectors[1].state,
+                selectThree: data.data.page_view.module_selectors[2].state,
+                selectFour: data.data.page_view.module_selectors[3].state,
+                selectFive: data.data.page_view.module_selectors[4].state,
+                selectSix: data.data.page_view.module_selectors[5].state,
+                selectSeven: data.data.page_view.module_selectors[6].state,
+                selectEight: data.data.page_view.module_selectors[7].state,
+                loadingData: true
+              },
+              () => {
                 let idx = 1;
-                for( let v of data.data.page_view.seria_buttons ) {
-                  if ( v.state === 1 ) {
+                for (let v of data.data.page_view.seria_buttons) {
+                  if (v.state === 1) {
                     S.state.seria = idx;
                   }
                   idx++;
                 }
-            });
+              }
+            );
           },
           error => {
             this.setState({
@@ -151,11 +157,11 @@ class Turnstille extends Component {
           }
         )
         .catch(err => err);
-       
-        //this.sendDataLeftTopBlockOnServer();
-        //this.sendDataRightTopBlockOnServer();
-        //this.sendDataLeftBottomBlockOnServer();
-        //this.sendDataRightBottomBlockOnServer();
+
+      //this.sendDataLeftTopBlockOnServer();
+      //this.sendDataRightTopBlockOnServer();
+      //this.sendDataLeftBottomBlockOnServer();
+      //this.sendDataRightBottomBlockOnServer();
 
       //this.handleClickOneSelect();
       //this.handleClickTwoSelect();
@@ -196,47 +202,50 @@ class Turnstille extends Component {
           },
           {
             module: 4,
-            state: ( this.state.selectFive < 0 ) ? 0 : this.state.selectFive
+            state: this.state.selectFive < 0 ? 0 : this.state.selectFive
           },
           {
             module: 5,
-            state: ( this.state.selectSix < 0 ) ? 0 : this.state.selectSix
+            state: this.state.selectSix < 0 ? 0 : this.state.selectSix
           },
           {
             module: 6,
-            state: ( this.state.selectSeven < 0 ) ? 0 : this.state.selectSeven
+            state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
           },
           {
             module: 7,
-            state: ( this.state.selectEight < 0 ) ? 0 : this.state.selectEight
+            state: this.state.selectEight < 0 ? 0 : this.state.selectEight
           }
         ]
       })
       .then(
         data => {
-          this.setState({
-            turnstile: data.data,
-            trigger: 1,
-            trigger_state: 1,
-            seria: 1,
-            selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-            loadingData: true
-          }, () => {
-            let idx = 1;
-            for( let v of data.data.page_view.seria_buttons ) {
-              if ( v.seria === 1 ) {
-                S.state.seria = idx;
+          this.setState(
+            {
+              turnstile: data.data,
+              trigger: 1,
+              trigger_state: 1,
+              seria: 1,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              loadingData: true
+            },
+            () => {
+              let idx = 1;
+              for (let v of data.data.page_view.seria_buttons) {
+                if (v.seria === 1) {
+                  S.state.seria = idx;
+                }
+                idx++;
               }
-              idx++;
             }
-        });
+          );
         },
         error => {
           this.setState({
@@ -277,47 +286,50 @@ class Turnstille extends Component {
           },
           {
             module: 4,
-            state: ( this.state.selectFive < 0 ) ? 0 : this.state.selectFive
+            state: this.state.selectFive < 0 ? 0 : this.state.selectFive
           },
           {
             module: 5,
-            state: ( this.state.selectSix < 0 ) ? 0 : this.state.selectSix
+            state: this.state.selectSix < 0 ? 0 : this.state.selectSix
           },
           {
             module: 6,
-            state: ( this.state.selectSeven < 0 ) ? 0 : this.state.selectSeven
+            state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
           },
           {
             module: 7,
-            state: ( this.state.selectEight < 0 ) ? 0 : this.state.selectEight
+            state: this.state.selectEight < 0 ? 0 : this.state.selectEight
           }
         ]
       })
       .then(
         data => {
-          this.setState({
-            turnstile: data.data,
-            trigger: 2,
-            trigger_state: 1,
-            seria: 2,
-            selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-            loadingData: true
-          }, () => {
-            let idx = 2;
-            for( let v of data.data.page_view.seria_buttons ) {
-              if ( v.seria === 2 ) {
-                S.state.seria = idx;
+          this.setState(
+            {
+              turnstile: data.data,
+              trigger: 2,
+              trigger_state: 1,
+              seria: 2,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              loadingData: true
+            },
+            () => {
+              let idx = 2;
+              for (let v of data.data.page_view.seria_buttons) {
+                if (v.seria === 2) {
+                  S.state.seria = idx;
+                }
+                idx++;
               }
-              idx++;
             }
-        });
+          );
         },
         error => {
           this.setState({
@@ -358,47 +370,50 @@ class Turnstille extends Component {
           },
           {
             module: 4,
-            state: ( this.state.selectFive < 0 ) ? 0 : this.state.selectFive
+            state: this.state.selectFive < 0 ? 0 : this.state.selectFive
           },
           {
             module: 5,
-            state: ( this.state.selectSix < 0 ) ? 0 : this.state.selectSix
+            state: this.state.selectSix < 0 ? 0 : this.state.selectSix
           },
           {
             module: 6,
-            state: ( this.state.selectSeven < 0 ) ? 0 : this.state.selectSeven
+            state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
           },
           {
             module: 7,
-            state: ( this.state.selectEight < 0 ) ? 0 : this.state.selectEight
+            state: this.state.selectEight < 0 ? 0 : this.state.selectEight
           }
         ]
       })
       .then(
         data => {
-          this.setState({
-            turnstile: data.data,
-            trigger: 3,
-            trigger_state: 1,
-            seria: 3,
-            selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-            loadingData: true
-          }, () => {
-            let idx = 3;
-            for( let v of data.data.page_view.seria_buttons ) {
-              if ( v.seria === 3 ) {
-                S.state.seria = idx;
+          this.setState(
+            {
+              turnstile: data.data,
+              trigger: 3,
+              trigger_state: 1,
+              seria: 3,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              loadingData: true
+            },
+            () => {
+              let idx = 3;
+              for (let v of data.data.page_view.seria_buttons) {
+                if (v.seria === 3) {
+                  S.state.seria = idx;
+                }
+                idx++;
               }
-              idx++;
             }
-        });
+          );
         },
         error => {
           this.setState({
@@ -439,47 +454,50 @@ class Turnstille extends Component {
           },
           {
             module: 4,
-            state: ( this.state.selectFive < 0 ) ? 0 : this.state.selectFive
+            state: this.state.selectFive < 0 ? 0 : this.state.selectFive
           },
           {
             module: 5,
-            state: ( this.state.selectSix < 0 ) ? 0 : this.state.selectSix
+            state: this.state.selectSix < 0 ? 0 : this.state.selectSix
           },
           {
             module: 6,
-            state: ( this.state.selectSeven < 0 ) ? 0 : this.state.selectSeven
+            state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
           },
           {
             module: 7,
-            state: ( this.state.selectEight < 0 ) ? 0 : this.state.selectEight
+            state: this.state.selectEight < 0 ? 0 : this.state.selectEight
           }
         ]
       })
       .then(
         data => {
-          this.setState({
-            turnstile: data.data,
-            trigger: 4,
-            trigger_state: 1,
-            seria: 4,
-            selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo:  data.data.page_view.module_selectors[1].state,
-              selectThree:  data.data.page_view.module_selectors[2].state,
-              selectFour:  data.data.page_view.module_selectors[3].state,
-              selectFive:  data.data.page_view.module_selectors[4].state,
-              selectSix:  data.data.page_view.module_selectors[5].state,
-              selectSeven:  data.data.page_view.module_selectors[6].state,
-              selectEight:  data.data.page_view.module_selectors[7].state,
-            loadingData: true
-          }, () => {
-            let idx = 3;
-            for( let v of data.data.page_view.seria_buttons ) {
-              if ( v.seria === 3 ) {
-                S.state.seria = idx;
+          this.setState(
+            {
+              turnstile: data.data,
+              trigger: 4,
+              trigger_state: 1,
+              seria: 4,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              loadingData: true
+            },
+            () => {
+              let idx = 3;
+              for (let v of data.data.page_view.seria_buttons) {
+                if (v.seria === 3) {
+                  S.state.seria = idx;
+                }
+                idx++;
               }
-              idx++;
             }
-        });
+          );
         },
         error => {
           this.setState({
@@ -496,79 +514,84 @@ class Turnstille extends Component {
   handleClickOneSelect = () => {
     let Self = this;
     //console.log( "state 1 = " + this.state.selectOne );
-      this.setState({
+    this.setState(
+      {
         selectOne: +!this.state.selectOne
-      }, () => { send() });  
+      },
+      () => {
+        send();
+      }
+    );
     function send() {
       //console.log( "state 1 = " + Self.state.selectOne );
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID5",
-        trigger: 5,
-        trigger_state: Self.state.selectOne,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 5,
+          trigger_state: Self.state.selectOne,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            //console.log( "data - " + data )
+            Self.setState({
+              turnstile: data.data,
+              trigger: 5,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            console.log("error - " + error);
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          //console.log( "data - " + data )           
-          Self.setState({
-            turnstile: data.data,
-            trigger: 5,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          console.log( "error - " + error )
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
-    };
+        )
+        .catch(err => err);
+    }
   };
 
   handleClickTwoSelect = () => {
@@ -577,77 +600,82 @@ class Turnstille extends Component {
     //    selectTwo: 0
     //  });
     //} else {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectTwo: +!this.state.selectTwo
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     //}
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID6",
-        trigger: 6,
-        trigger_state: Self.state.selectTwo,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID6",
+          trigger: 6,
+          trigger_state: Self.state.selectTwo,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 6, // ???
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1, // ???
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 6, // ???
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo: data.data.page_view.module_selectors[1].state,
-            selectThree: data.data.page_view.module_selectors[2].state,
-            selectFour: data.data.page_view.module_selectors[3].state,
-            selectFive: data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1, // ???
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
 
@@ -657,158 +685,168 @@ class Turnstille extends Component {
     //    selectThree: 0
     //  });
     //} else {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectThree: +!this.state.selectThree
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     //}
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID7",
-        trigger: 7,
-        trigger_state: Self.state.selectThree,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID7",
+          trigger: 7,
+          trigger_state: Self.state.selectThree,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 7,
+              //trigger_state: 1,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 7,
-            //trigger_state: 1,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
-          
+
   handleClickFourSelect = () => {
     //if (this.state.selectFour === 1) {
     //  this.setState({
     //    selectFour: 0
     //  });
     //} else {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectFour: +!this.state.selectFour
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     //}
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID8",
-        trigger: 8,
-        trigger_state: Self.state.selectFour,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID8",
+          trigger: 8,
+          trigger_state: Self.state.selectFour,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 8,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 8,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
-    };
+        )
+        .catch(err => err);
+    }
   };
   handleClickFiveSelect = () => {
     //if (this.state.selectFive === 1) {
@@ -816,77 +854,82 @@ class Turnstille extends Component {
     //    selectFive: 0
     //  });
     //} else {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectFive: +!this.state.selectFive
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     //}
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID5",
-        trigger: 9,
-        trigger_state: Self.state.selectFive,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 9,
+          trigger_state: Self.state.selectFive,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 9,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 9,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
   handleClickSixSelect = () => {
@@ -895,226 +938,240 @@ class Turnstille extends Component {
     //    selectSix: 0
     //  });
     //} else {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectSix: +!this.state.selectSix
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     //}
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID5",
-        trigger: 10,
-        trigger_state: Self.state.selectSix,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 10,
+          trigger_state: Self.state.selectSix,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 10,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 10,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
   handleClickSevenSelect = () => {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectSeven: +!this.state.selectSeven
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID5",
-        trigger: 11,
-        trigger_state: Self.state.selectSeven,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 11,
+          trigger_state: Self.state.selectSeven,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 11,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 11,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
   handleClickEightSelect = () => {
-      let Self = this;
-      this.setState({
+    let Self = this;
+    this.setState(
+      {
         selectEight: +!this.state.selectEight
-      }, () => { send() });
+      },
+      () => {
+        send();
+      }
+    );
     function send() {
-    axios
-      .post(`${site}/turnstile`, {
-        app_id: "UUID5",
-        trigger: 12,
-        trigger_state: Self.state.selectEight,
-        seria: Self.state.seria,
-        module_selectors: [
-          {
-            module: 0,
-            state: Self.state.selectOne,
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 12,
+          trigger_state: Self.state.selectEight,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 12,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state
+              //trigger_state: 1,
+            });
           },
-          {
-            module: 1,
-            state: Self.state.selectTwo
-          },
-          {
-            module: 2,
-            state: Self.state.selectThree
-          },
-          {
-            module: 3,
-            state: Self.state.selectFour
-          },
-          {
-            module: 4,
-            state: ( Self.state.selectFive < 0 ) ? 0 : Self.state.selectFive
-          },
-          {
-            module: 5,
-            state: ( Self.state.selectSix < 0 ) ? 0 : Self.state.selectSix
-          },
-          {
-            module: 6,
-            state: ( Self.state.selectSeven < 0 ) ? 0 : Self.state.selectSeven
-          },
-          {
-            module: 7,
-            state: ( Self.state.selectEight < 0 ) ? 0 : Self.state.selectEight
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
           }
-        ]
-      })
-      .then(
-        data => {
-          Self.setState({
-            turnstile: data.data,
-            trigger: 12,
-            selectOne: data.data.page_view.module_selectors[0].state,
-            selectTwo:  data.data.page_view.module_selectors[1].state,
-            selectThree:  data.data.page_view.module_selectors[2].state,
-            selectFour:  data.data.page_view.module_selectors[3].state,
-            selectFive:  data.data.page_view.module_selectors[4].state,
-            selectSix:  data.data.page_view.module_selectors[5].state,
-            selectSeven:  data.data.page_view.module_selectors[6].state,
-            selectEight:  data.data.page_view.module_selectors[7].state,
-            //trigger_state: 1,
-          });
-        },
-        error => {
-          Self.setState({
-            loadingData: true,
-            error
-          });
-        }
-      )
-      .catch(err => err);
+        )
+        .catch(err => err);
     }
   };
-
 
   render() {
     const { turnstile, loadingData, error } = this.state;
@@ -1129,28 +1186,27 @@ class Turnstille extends Component {
     //console.log(this.state.selectEight)
     //console.log("Trigger " + this.state.trigger)
     //console.log(this.state)
-    
-    let seria_buttons_image_top_left = turnstile.page_view
-      ? turnstile.page_view.seria_buttons[0].image_source
-      : null;
-    seria_buttons_image_top_left = site + seria_buttons_image_top_left;
 
-    let seria_buttons_image_top_right = turnstile.page_view
-      ? turnstile.page_view.seria_buttons[1].image_source
-      : null;
-    seria_buttons_image_top_right = site + seria_buttons_image_top_right;
+    // let seria_buttons_image_top_left = turnstile.page_view
+    //   ? turnstile.page_view.seria_buttons[0].image_source
+    //   : null;
+    // seria_buttons_image_top_left = site + seria_buttons_image_top_left;
 
-    let seria_buttons_image_bottom_left = turnstile.page_view
-      ? turnstile.page_view.seria_buttons[2].image_source
-      : null;
-    seria_buttons_image_bottom_left = site + seria_buttons_image_bottom_left;
+    // let seria_buttons_image_top_right = turnstile.page_view
+    //   ? turnstile.page_view.seria_buttons[1].image_source
+    //   : null;
+    // seria_buttons_image_top_right = site + seria_buttons_image_top_right;
 
-    let seria_buttons_image_bottom_right = turnstile.page_view
-      ? turnstile.page_view.seria_buttons[3].image_source
-      : null;
-    seria_buttons_image_bottom_right = site + seria_buttons_image_bottom_right;
-    
-    
+    // let seria_buttons_image_bottom_left = turnstile.page_view
+    //   ? turnstile.page_view.seria_buttons[2].image_source
+    //   : null;
+    // seria_buttons_image_bottom_left = site + seria_buttons_image_bottom_left;
+
+    // let seria_buttons_image_bottom_right = turnstile.page_view
+    //   ? turnstile.page_view.seria_buttons[3].image_source
+    //   : null;
+    // seria_buttons_image_bottom_right = site + seria_buttons_image_bottom_right;
+
     let photoOne = turnstile.page_view
       ? turnstile.page_view.carousel_images[0].image_source
       : null;
@@ -1184,31 +1240,32 @@ class Turnstille extends Component {
         <div className="wrapper-main">
           <p className="main-description">{turnstile.page_view.caption}</p>
           <div className="wrapper-main-content">
-
-          {/****************** LEFT BLOCK ******************/}
+            {/****************** LEFT BLOCK ******************/}
 
             <div className="wrapper-left-block__turnstille">
               <div className="block">
-                {
-                  turnstile.page_view.seria_buttons
+                {turnstile.page_view.seria_buttons
                   .slice(0, 1)
                   .map((index, key) => {
-                    if (index.state === 1) {                     
+                    let cont = index.caption;
+                    const Text = t => {
+                      return <p dangerouslySetInnerHTML={{ __html: t }}></p>;
+                    };
+                    if (index.state === 1) {
                       return (
                         <div
                           key={index.index}
                           onClick={this.sendDataLeftTopBlockOnServer}
                           className="wrapper-left__top__block open"
                         >
-                          <img
-                            src={seria_buttons_image_top_left}
-                            className="left-top-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="left-top-block__description">
-                            Компактные турникеты
-                            <br />
-                            &emsp;&emsp;&emsp;серии "STR"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="left-top-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="left-top-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1219,15 +1276,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataLeftTopBlockOnServer}
                           className="wrapper-left__top__block"
                         >
-                          <img
-                            src={seria_buttons_image_top_left}
-                            className="left-top-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="left-top-block__description">
-                            Компактные турникеты
-                            <br />
-                            &emsp;&emsp;&emsp;серии "STR"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="left-top-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="left-top-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1237,6 +1293,10 @@ class Turnstille extends Component {
                 {turnstile.page_view.seria_buttons
                   .slice(1, 2)
                   .map((index, key) => {
+                    let cont = index.caption;
+                    const Text = t => {
+                      return <p dangerouslySetInnerHTML={{ __html: t }}></p>;
+                    };
                     if (index.state === 1) {
                       return (
                         <div
@@ -1244,15 +1304,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataRightTopBlockOnServer}
                           className="wrapper-right__top__block open"
                         >
-                          <img
-                            src={seria_buttons_image_top_right}
-                            className="right-top-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="right-top-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STR"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="right-top-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="right-top-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1263,15 +1322,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataRightTopBlockOnServer}
                           className="wrapper-right__top__block"
                         >
-                          <img
-                            src={seria_buttons_image_top_right}
-                            className="right-top-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="right-top-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STR"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="right-top-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="right-top-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1283,6 +1341,10 @@ class Turnstille extends Component {
                 {turnstile.page_view.seria_buttons
                   .slice(2, 3)
                   .map((index, key) => {
+                    let cont = index.caption;
+                    const Text = t => {
+                      return <p dangerouslySetInnerHTML={{ __html: t }}></p>;
+                    };
                     if (index.state === 1) {
                       return (
                         <div
@@ -1290,15 +1352,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataLeftBottomBlockOnServer}
                           className="wrapper-left__bottom__block open"
                         >
-                          <img
-                            src={seria_buttons_image_bottom_left}
-                            className="left-bottom-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="left-bottom-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STX"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="left-bottom-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="left-bottom-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1309,15 +1370,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataLeftBottomBlockOnServer}
                           className="wrapper-left__bottom__block"
                         >
-                          <img
-                            src={seria_buttons_image_bottom_left}
-                            className="left-bottom-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="left-bottom-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STX"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="left-bottom-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="left-bottom-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1326,6 +1386,10 @@ class Turnstille extends Component {
                 {turnstile.page_view.seria_buttons
                   .slice(3, 4)
                   .map((index, key) => {
+                    let cont = index.caption;
+                    const Text = t => {
+                      return <p dangerouslySetInnerHTML={{ __html: t }}></p>;
+                    };
                     if (index.state === 1) {
                       return (
                         <div
@@ -1333,15 +1397,14 @@ class Turnstille extends Component {
                           onClick={this.sendDataRightBottomBlockOnServer}
                           className="wrapper-right__bottom__block open"
                         >
-                          <img
-                            src={seria_buttons_image_bottom_right}
-                            className="right-bottom-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="right-bottom-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STX"
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="right-bottom-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="right-bottom-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1351,16 +1414,15 @@ class Turnstille extends Component {
                           key={index.index}
                           onClick={this.sendDataRightBottomBlockOnServer}
                           className="wrapper-right__bottom__block"
-                        > 
-                        <img
-                            src={seria_buttons_image_bottom_right}
-                            className="right-bottom-block__photo"
-                            alt=""
-                          ></img>
-                          <div className="right-bottom-block__description">
-                            Тумбовые турникеты
-                            <br />
-                            &emsp;&emsp;серии "STX"
+                        >
+                          <div style={{'width': '150px', 'height': '150px', 'padding-top': '10px'}}>
+                            <div className="right-bottom-block__photo"></div>
+                          </div>
+                          <div
+                            style={{ textAlign: "center" }}
+                            className="right-bottom-block__description"
+                          >
+                            {Text(cont)}
                           </div>
                         </div>
                       );
@@ -1369,7 +1431,7 @@ class Turnstille extends Component {
               </div>
             </div>
 
-             {/****************** CENTRAL BLOCK ******************/}
+            {/****************** CENTRAL BLOCK ******************/}
 
             <div className="wrapper-center-block__turnstille">
               <div className="center-block__top">
@@ -1381,7 +1443,7 @@ class Turnstille extends Component {
                     <img className="center-block__top" src={photoTwo} alt="" />
                   </div>
                   <div>
-                    <img className="center-block__top" src={photoThree} alt="" />
+                    <img className="center-block__top" src={photoThree} alt=""/>
                   </div>
                   <div>
                     <img className="center-block__top" src={photoFour} alt="" />
@@ -1389,23 +1451,20 @@ class Turnstille extends Component {
                 </Carousel>
               </div>
               <div className="center-block__bottom">
-                <div className="center-block__description">Комплектация:</div>
                 <div className="center-block__list">
-                  <ul className="list">
-                    {turnstile.page_view.model_module_list.map((index, key) => (
-                      <li key={index.index}>{index.caption}</li>
-                    ))}
-                  </ul>
-                  <ul className="list-price">
-                    {turnstile.page_view.model_module_list.map((index, key) => (
-                      <li key={index.index}>{index.price}</li>
-                    ))}
-                  </ul>
-                </div>
+                    <ul className="list">
+                      {turnstile.page_view.model_module_list.map((index, key) => (
+                        <li key={index.index}>
+                          <li style={{'width': '70%'}}>&#9679;&nbsp;&nbsp;&nbsp;&nbsp;{index.caption}</li> 
+                          <li style={{'width': '20%'}}>{index.price}</li>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
               </div>
             </div>
 
-             {/****************** RIGHT BLOCK ******************/}
+            {/****************** RIGHT BLOCK ******************/}
 
             <div className="wrapper-right-block__turnstille">
               <div className="right-block__top">
@@ -1425,7 +1484,7 @@ class Turnstille extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Скачать описание
+                    Подробнее
                   </a>
                 </div>
               </div>
