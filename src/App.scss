@@ -1,5 +1,12 @@
+html {
+	height: 100%;
+}
+body, #root {
+	height: 100%;
+}
 .wrapper-configurator {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;

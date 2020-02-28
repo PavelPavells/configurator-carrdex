@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import queryString from "query-string";
 //import Checkboxes from "./Checkboxes";
 import site from "../../Global";
@@ -23,6 +23,7 @@ class Turnstille extends Component {
       trigger_state: 0,
       state: 0,
       defaultSelect: false,
+      popup: false,
       selectOne: 0,
       selectTwo: 0,
       selectThree: 0,
@@ -31,6 +32,8 @@ class Turnstille extends Component {
       selectSix: 0,
       selectSeven: 0,
       selectEight: 0,
+      selectNine: 0,
+      selectTen: 0,
       error: null
     };
   }
@@ -176,6 +179,8 @@ class Turnstille extends Component {
   // SEND DATA TOP LEFT BLOCK
 
   sendDataLeftTopBlockOnServer = () => {
+    //let element = document.getElementsByClassName("right-block__center-button__left-button")[0];
+    //element.classList.toggle("open");
     let S = this;
     axios
       .post(`${site}/turnstile`, {
@@ -260,6 +265,8 @@ class Turnstille extends Component {
   // SEND DATA TOP RIGHT BLOCK
 
   sendDataRightTopBlockOnServer = e => {
+    //let element = document.getElementsByClassName("right-block__center-button__right-button")[0];
+    //element.classList.toggle("open");
     let S = this;
     axios
       .post(`${site}/turnstile`, {
@@ -508,12 +515,14 @@ class Turnstille extends Component {
       )
       .catch(err => err);
   };
+  //resetOptions = () => {
+  //  this.componentDidMount();
+  //}
 
   // RIGHT BLOCK SELECTORS
 
   handleClickOneSelect = () => {
     let Self = this;
-    //console.log( "state 1 = " + this.state.selectOne );
     this.setState(
       {
         selectOne: +!this.state.selectOne
@@ -523,7 +532,6 @@ class Turnstille extends Component {
       }
     );
     function send() {
-      //console.log( "state 1 = " + Self.state.selectOne );
       axios
         .post(`${site}/turnstile`, {
           app_id: "UUID5",
@@ -567,7 +575,6 @@ class Turnstille extends Component {
         })
         .then(
           data => {
-            //console.log( "data - " + data )
             Self.setState({
               turnstile: data.data,
               trigger: 5,
@@ -579,7 +586,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
             });
           },
           error => {
@@ -595,11 +601,6 @@ class Turnstille extends Component {
   };
 
   handleClickTwoSelect = () => {
-    //if (this.state.selectTwo === 1) {
-    //  this.setState({
-    //    selectTwo: 0
-    //  });
-    //} else {
     let Self = this;
     this.setState(
       {
@@ -609,7 +610,6 @@ class Turnstille extends Component {
         send();
       }
     );
-    //}
     function send() {
       axios
         .post(`${site}/turnstile`, {
@@ -656,7 +656,7 @@ class Turnstille extends Component {
           data => {
             Self.setState({
               turnstile: data.data,
-              trigger: 6, // ???
+              trigger: 6,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -665,7 +665,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1, // ???
             });
           },
           error => {
@@ -680,11 +679,6 @@ class Turnstille extends Component {
   };
 
   handleClickThreeSelect = () => {
-    //if (this.state.selectThree === 1) {
-    //  this.setState({
-    //    selectThree: 0
-    //  });
-    //} else {
     let Self = this;
     this.setState(
       {
@@ -694,7 +688,6 @@ class Turnstille extends Component {
         send();
       }
     );
-    //}
     function send() {
       axios
         .post(`${site}/turnstile`, {
@@ -742,7 +735,6 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 7,
-              //trigger_state: 1,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -765,11 +757,6 @@ class Turnstille extends Component {
   };
 
   handleClickFourSelect = () => {
-    //if (this.state.selectFour === 1) {
-    //  this.setState({
-    //    selectFour: 0
-    //  });
-    //} else {
     let Self = this;
     this.setState(
       {
@@ -779,7 +766,6 @@ class Turnstille extends Component {
         send();
       }
     );
-    //}
     function send() {
       axios
         .post(`${site}/turnstile`, {
@@ -835,7 +821,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
             });
           },
           error => {
@@ -849,11 +834,6 @@ class Turnstille extends Component {
     }
   };
   handleClickFiveSelect = () => {
-    //if (this.state.selectFive === 1) {
-    //  this.setState({
-    //    selectFive: 0
-    //  });
-    //} else {
     let Self = this;
     this.setState(
       {
@@ -863,7 +843,6 @@ class Turnstille extends Component {
         send();
       }
     );
-    //}
     function send() {
       axios
         .post(`${site}/turnstile`, {
@@ -919,7 +898,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
             });
           },
           error => {
@@ -933,11 +911,6 @@ class Turnstille extends Component {
     }
   };
   handleClickSixSelect = () => {
-    //if (this.state.selectSix === 1) {
-    //  this.setState({
-    //    selectSix: 0
-    //  });
-    //} else {
     let Self = this;
     this.setState(
       {
@@ -947,7 +920,6 @@ class Turnstille extends Component {
         send();
       }
     );
-    //}
     function send() {
       axios
         .post(`${site}/turnstile`, {
@@ -1003,7 +975,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
             });
           },
           error => {
@@ -1081,7 +1052,6 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
             });
           },
           error => {
@@ -1159,7 +1129,180 @@ class Turnstille extends Component {
               selectSix: data.data.page_view.module_selectors[5].state,
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state
-              //trigger_state: 1,
+            });
+          },
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
+          }
+        )
+        .catch(err => err);
+    }
+  };
+  handleClickNineSelect = () => {
+    let Self = this;
+    this.setState(
+      {
+        selectNine: +!this.state.selectNine
+      },
+      () => {
+        send();
+      }
+    );
+    function send() {
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 13,
+          trigger_state: Self.state.selectNine,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            },
+            {
+              module: 8,
+              state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
+            },
+            {
+              module: 9,
+              state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 13,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              selectNine: data.data.page_view.module_selectors[8].state,
+              selectTen: data.data.page_view.module_selectors[9].state
+            });
+          },
+          error => {
+            Self.setState({
+              loadingData: true,
+              error
+            });
+          }
+        )
+        .catch(err => err);
+    }
+  };
+  handleClickTenSelect = () => {
+    let Self = this;
+    this.setState(
+      {
+        selectTen: +!this.state.selectTen
+      },
+      () => {
+        send();
+      }
+    );
+    function send() {
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID5",
+          trigger: 14,
+          trigger_state: Self.state.selectTen,
+          seria: Self.state.seria,
+          module_selectors: [
+            {
+              module: 0,
+              state: Self.state.selectOne
+            },
+            {
+              module: 1,
+              state: Self.state.selectTwo
+            },
+            {
+              module: 2,
+              state: Self.state.selectThree
+            },
+            {
+              module: 3,
+              state: Self.state.selectFour
+            },
+            {
+              module: 4,
+              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+            },
+            {
+              module: 5,
+              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+            },
+            {
+              module: 6,
+              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+            },
+            {
+              module: 7,
+              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+            },
+            {
+              module: 8,
+              state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
+            },
+            {
+              module: 9,
+              state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
+            }
+          ]
+        })
+        .then(
+          data => {
+            Self.setState({
+              turnstile: data.data,
+              trigger: 14,
+              selectOne: data.data.page_view.module_selectors[0].state,
+              selectTwo: data.data.page_view.module_selectors[1].state,
+              selectThree: data.data.page_view.module_selectors[2].state,
+              selectFour: data.data.page_view.module_selectors[3].state,
+              selectFive: data.data.page_view.module_selectors[4].state,
+              selectSix: data.data.page_view.module_selectors[5].state,
+              selectSeven: data.data.page_view.module_selectors[6].state,
+              selectEight: data.data.page_view.module_selectors[7].state,
+              selectNine: data.data.page_view.module_selectors[8].state,
+              selectTen: data.data.page_view.module_selectors[9].state
             });
           },
           error => {
@@ -1238,10 +1381,10 @@ class Turnstille extends Component {
     } else {
       return (
         <div className="wrapper-main">
-          <p className="main-description">{turnstile.page_view.caption}</p>
+          {/*<p className="main-description">{turnstile.page_view.caption}</p>*/}
           <div className="wrapper-main-content">
             {/****************** LEFT BLOCK ******************/}
-
+          {/*
             <div className="wrapper-left-block__turnstille">
               <div className="block">
                 {turnstile.page_view.seria_buttons
@@ -1430,6 +1573,7 @@ class Turnstille extends Component {
                   })}
               </div>
             </div>
+                */}
 
             {/****************** CENTRAL BLOCK ******************/}
 
@@ -1453,11 +1597,9 @@ class Turnstille extends Component {
               <div className="center-block__bottom">
                 <div className="center-block__list">
                     <ul className="list">
+                    <div className='list-description'>Состав модели:</div>
                       {turnstile.page_view.model_module_list.map((index, key) => (
-                        <li key={index.index}>
-                          <li style={{'width': '70%'}}>&#9679;&nbsp;&nbsp;&nbsp;&nbsp;{index.caption}</li> 
-                          <li style={{'width': '20%'}}>{index.price}</li>
-                        </li>
+                        <li>{index.caption}</li> 
                       ))}
                     </ul>
                   </div>
@@ -1470,26 +1612,76 @@ class Turnstille extends Component {
               <div className="right-block__top">
                 <div className="right-block__top-description">
                   <div className="description-model">Модель</div>
+                  <div className="description-seria">Серия</div>
+                  <div className="description-price">
+                      Итоговая стоимость{/*{turnstile.page_view.model_price}*/}
+                  </div>
+                </div>
+                <div className="right-block__center-description">
+                  <div className="description-model">
+                    {turnstile.page_view.model_name}
+                  </div>
+                  <div className='description-choice'>
+                    <div className='description-choice-str'>STR</div>
+                    <div className='description-choice-stx'>STX</div>
+                  </div>
                   <div className="description-price">
                     {turnstile.page_view.model_price}
                   </div>
                 </div>
                 <div className="right-block__bottom-description">
-                  <div className="description-model">
-                    {turnstile.page_view.model_name}
-                  </div>
-                  <a
-                    className="description-button"
-                    href={turnstile.page_view.download_broshure_button_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Подробнее
+                    <a
+                      className="description-button"
+                      href={turnstile.page_view.download_broshure_button_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                    ПОДРОБНЕЕ О МОДЕЛИ
+                    <div className='right-block__select-description__arrow'></div>
                   </a>
+                  <div className="description-model">
+                    БАЗОВАЯ МОДЕЛЬ (42 790 руб.){/*{turnstile.page_view.model_name}*/}
+                  </div>
+                </div>
+                <div className='right-block__bottom-description__options'>
+                  <div className='right-block__bottom-description__options__choice-optoins'>+ 4 ОПЦИИ</div>
+                  <div onClick={this.resetOptions} className='right-block__bottom-description__options__clear-options'>СБРОСИТЬ</div>
+                </div>
+              </div>
+              <div className='right-block__center'>
+                <div className='right-block__center-description'>Исполнение</div>
+                <div className='right-block__center-button'>
+                {turnstile.page_view.seria_buttons
+                  .slice(0, 1)
+                  .map((index, key) => {
+                    if (index.state === 1) {
+                      return (
+                        <div onClick={this.sendDataLeftTopBlockOnServer} className='right-block__center-button__left-button open'>Компакт</div>
+                      )
+                    } else {
+                      return (
+                        <div onClick={this.sendDataLeftTopBlockOnServer} className='right-block__center-button__left-button'>Компакт</div>
+                      )
+                    }
+                  })}
+                  {turnstile.page_view.seria_buttons
+                    .slice(1, 2)
+                    .map((index, key) => {
+                      if (index.state === 1) {
+                        return (
+                          <div onClick={this.sendDataRightTopBlockOnServer} className='right-block__center-button__right-button open'>Тумбовый</div>
+                        )
+                      } else {
+                        return (
+                          <div onClick={this.sendDataRightTopBlockOnServer} className='right-block__center-button__right-button'>Тумбовый</div>
+                        )
+                      }
+                    })}
                 </div>
               </div>
               <div className="right-block__bottom">
-                {/** //BLOCK 1 */}
+
+                {/** =================== BLOCK 1 =================== */}
 
                 {turnstile.page_view.module_selectors
                   .slice(0, 1)
@@ -1497,6 +1689,18 @@ class Turnstille extends Component {
                     if (index.state === -1) {
                       return (
                         <div className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-one'></div>
+                              Универсальный сетевой контроллер расширения EP-2000{/*{index.caption}*/}
+                                <div className='right-block__select-description__more-info'>
+                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch">
                             <input
                               type="checkbox"
@@ -1514,17 +1718,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-one'></div>
+                              Универсальный сетевой контроллер расширения EP-2000
+                                <div className='right-block__select-description__more-info'>
+                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch">
                             <input
                               type="checkbox"
@@ -1542,18 +1752,13 @@ class Turnstille extends Component {
                               <span className="onoffswitch-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
+                          
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 2 */}
+                {/** =================== BLOCK 2 =================== */}
 
                 {turnstile.page_view.module_selectors
                   .slice(1, 2)
@@ -1561,6 +1766,18 @@ class Turnstille extends Component {
                     if (index.state === -1) {
                       return (
                         <div className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-two'></div>
+                              RFID идентификаторы EMMarin 125 kHZ{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch2">
                             <input
                               type="checkbox"
@@ -1578,17 +1795,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch2-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-two'></div>
+                            RFID идентификаторы EMMarin 125 kHZ{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch2">
                             <input
                               type="checkbox"
@@ -1606,18 +1829,12 @@ class Turnstille extends Component {
                               <span className="onoffswitch2-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 3 */}
+                {/** =================== BLOCK 3 =================== */}
 
                 {turnstile.page_view.module_selectors
                   .slice(2, 3)
@@ -1625,6 +1842,18 @@ class Turnstille extends Component {
                     if (index.state === -1) {
                       return (
                         <div className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-three'></div>
+                            RFID идентификаторы Mifare 13.56MHz{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch3">
                             <input
                               type="checkbox"
@@ -1642,17 +1871,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch3-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-three'></div>
+                            RFID идентификаторы Mifare 13.56MHz{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch3">
                             <input
                               type="checkbox"
@@ -1670,18 +1905,12 @@ class Turnstille extends Component {
                               <span className="onoffswitch3-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 4 */}
+                {/** =================== BLOCK 4 =================== */}
 
                 {turnstile.page_view.module_selectors
                   .slice(3, 4)
@@ -1689,6 +1918,18 @@ class Turnstille extends Component {
                     if (index.state === -1) {
                       return (
                         <div className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-four'></div>
+                            Биометрическая идентификация по отпечаткам пальцев{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch4">
                             <input
                               type="checkbox"
@@ -1706,17 +1947,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch4-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-four'></div>
+                            Биометрическая идентификация по отпечаткам пальцев{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch4">
                             <input
                               type="checkbox"
@@ -1734,24 +1981,30 @@ class Turnstille extends Component {
                               <span className="onoffswitch4-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 5 */}
+                {/** =================== BLOCK 5 =================== */}
                 {turnstile.page_view.module_selectors
                   .slice(4, 5)
                   .map((index, key) => {
                     if (index.state === -1) {
                       return (
                         <div key={index.index} className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-five'></div>
+                            Информационный дисплей учета рабочего времени{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch5">
                             <input
                               type="checkbox"
@@ -1769,17 +2022,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch5-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-five'></div>
+                            Информационный дисплей учета рабочего времени{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch5">
                             <input
                               type="checkbox"
@@ -1797,24 +2056,30 @@ class Turnstille extends Component {
                               <span className="onoffswitch5-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 6 */}
+                {/** =================== BLOCK 6 =================== */}
                 {turnstile.page_view.module_selectors
                   .slice(5, 6)
                   .map((index, key) => {
                     if (index.state === -1) {
                       return (
                         <div key={index.index} className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-six'></div>
+                            Контроль разовых посещений по 2D штрих-кодам{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch6">
                             <input
                               type="checkbox"
@@ -1832,17 +2097,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch6-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-six'></div>
+                            Контроль разовых посещений по 2D штрих-кодам{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch6">
                             <input
                               type="checkbox"
@@ -1860,24 +2131,30 @@ class Turnstille extends Component {
                               <span className="onoffswitch6-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 7 */}
+                {/** =================== BLOCK 7 =================== */}
                 {turnstile.page_view.module_selectors
                   .slice(6, 7)
                   .map((index, key) => {
                     if (index.state === -1) {
                       return (
                         <div key={index.index} className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-seven'></div>
+                            Гостевой доступ по 2D штрих-кодам{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch7">
                             <input
                               type="checkbox"
@@ -1895,17 +2172,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch7-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-seven'></div>
+                            Гостевой доступ по 2D штрих-кодам{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch7">
                             <input
                               type="checkbox"
@@ -1923,25 +2206,31 @@ class Turnstille extends Component {
                               <span className="onoffswitch7-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
 
-                {/** //BLOCK 8 */}
+                {/** =================== BLOCK 8 =================== */}
 
                 {turnstile.page_view.module_selectors
-                  .slice(7)
+                  .slice(7, 8)
                   .map((index, key) => {
                     if (index.state === -1) {
                       return (
                         <div key={index.index} className="wrapper-select none">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-eight'></div>
+                            Корпус кожуха из нержавеющей стали{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch8">
                             <input
                               type="checkbox"
@@ -1959,17 +2248,23 @@ class Turnstille extends Component {
                               <span className="onoffswitch8-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     } else {
                       return (
                         <div key={index.index} className="wrapper-select">
+                          <div
+                            key={key.index}
+                            className="right-block__select-description"
+                          >
+                            <div className='right-block__select-description__photo-eight'></div>
+                            Корпус кожуха из нержавеющей стали{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                          </div>
+                          <div className='right-block__select-description__plus-price'>+10000</div>
                           <div className="onoffswitch8">
                             <input
                               type="checkbox"
@@ -1987,17 +2282,159 @@ class Turnstille extends Component {
                               <span className="onoffswitch8-switch"></span>
                             </label>
                           </div>
-                          <div
-                            key={key.index}
-                            className="right-block__select-description"
-                          >
-                            {index.caption}
-                          </div>
                         </div>
                       );
                     }
                   })}
-                {/** // ENDS BLOCK */}
+                  {/** =================== BLOCK 9 =================== */}
+                  {turnstile.page_view.module_selectors
+                    .slice(7, 8)  //(8, 9)
+                    .map((index, key) => {
+                      if (index.state === -1) {
+                        return (
+                          <div key={index.index} className="wrapper-select none">
+                            <div
+                              key={key.index}
+                              className="right-block__select-description"
+                            >
+                              <div className='right-block__select-description__photo-nine'></div>
+                                Конвертер расширения интерфейса Ethernet{/*{index.caption}*/}
+                                <div className='right-block__select-description__more-info'>
+                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                  <div className='right-block__select-description__more-info__arrow'></div>
+                                </div>{/*{index.caption}*/}
+                            </div>
+                            <div className='right-block__select-description__plus-price'>+10000</div>
+                            <div className="onoffswitch9">
+                              <input
+                                type="checkbox"
+                                name="onoffswitch"
+                                className="onoffswitch9-checkbox"
+                                id="header9-checkbox"
+                                onClick={this.handleClickNineSelect}
+                                checked={this.state.defaultSelect}
+                              />
+                              <label
+                                className="onoffswitch9-label"
+                                htmlFor="header9-checkbox"
+                              >
+                                <span className="onoffswitch9-inner"></span>
+                                <span className="onoffswitch9-switch"></span>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={index.index} className="wrapper-select">
+                            <div
+                              key={key.index}
+                              className="right-block__select-description"
+                            >
+                              <div className='right-block__select-description__photo-nine'></div>
+                              Конвертер расширения интерфейса Ethernet{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                            </div>
+                            <div className='right-block__select-description__plus-price'>+10000</div>
+                            <div className="onoffswitch9">
+                              <input
+                                type="checkbox"
+                                name="onoffswitch"
+                                className="onoffswitch9-checkbox"
+                                id="header9-checkbox"
+                                onChange={this.handleClickNineSelect}
+                                checked={this.state.selectNine}
+                              />
+                              <label
+                                className="onoffswitch9-label"
+                                htmlFor="header9-checkbox"
+                              >
+                                <span className="onoffswitch9-inner"></span>
+                                <span className="onoffswitch9-switch"></span>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  {/** =================== BLOCK 10 =================== */}
+                  {turnstile.page_view.module_selectors
+                    .slice(7, 8) //(9, 10)
+                    .map((index, key) => {
+                      if (index.state === -1) {
+                        return (
+                          <div key={index.index} className="wrapper-select none">
+                            <div
+                              key={key.index}
+                              className="right-block__select-description"
+                            >
+                              <div className='right-block__select-description__photo-ten'></div>
+                              Контроллер расширения Bluetooth{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                            </div>
+                            <div className='right-block__select-description__plus-price'>+10000</div>
+                            <div className="onoffswitch10">
+                              <input
+                                type="checkbox"
+                                name="onoffswitch"
+                                className="onoffswitch10-checkbox"
+                                id="header10-checkbox"
+                                onClick={this.handleClickTenSelect}
+                                checked={this.state.defaultSelect}
+                              />
+                              <label
+                                className="onoffswitch10-label"
+                                htmlFor="header10-checkbox"
+                              >
+                                <span className="onoffswitch10-inner"></span>
+                                <span className="onoffswitch10-switch"></span>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={index.index} className="wrapper-select">
+                            <div
+                              key={key.index}
+                              className="right-block__select-description"
+                            >
+                              <div className='right-block__select-description__photo-ten'></div>
+                              Контроллер расширения Bluetooth{/*{index.caption}*/}
+                              <div className='right-block__select-description__more-info'>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <div className='right-block__select-description__more-info__arrow'></div>
+                              </div>{/*{index.caption}*/}
+                            </div>
+                            <div className='right-block__select-description__plus-price'>+10000</div>
+                            <div className="onoffswitch10">
+                              <input
+                                type="checkbox"
+                                name="onoffswitch"
+                                className="onoffswitch10-checkbox"
+                                id="header10-checkbox"
+                                onChange={this.handleClickTenSelect}
+                                checked={this.state.selectTen}
+                              />
+                              <label
+                                className="onoffswitch10-label"
+                                htmlFor="header10-checkbox"
+                              >
+                                <span className="onoffswitch10-inner"></span>
+                                <span className="onoffswitch10-switch"></span>
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                {/** =================== ENDS BLOCK =================== */}
               </div>
             </div>
           </div>
