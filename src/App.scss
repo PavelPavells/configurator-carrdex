@@ -4,6 +4,10 @@ html {
 body, #root {
 	height: 100%;
 }
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+}
 .wrapper-configurator {
   display: flex;
   flex-wrap: wrap;

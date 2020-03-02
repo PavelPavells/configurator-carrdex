@@ -1316,9 +1316,146 @@ class Turnstille extends Component {
     }
   };
 
+  clearOptions = () => {
+    let S = this;
+    if (window.location.search === "") {
+      axios
+        .post(`${site}/turnstile`, {
+          app_id: "UUID1",
+          trigger: 0,
+          trigger_state: 1,
+          seria: 0,
+          module_selectors: [
+            {
+              module: 0,
+              state: 0
+            },
+            {
+              module: 1,
+              state: 0
+            },
+            {
+              module: 2,
+              state: 0
+            },
+            {
+              module: 3,
+              state: 0
+            },
+            {
+              module: 4,
+              state: 0
+            },
+            {
+              module: 5,
+              state: 0
+            },
+            {
+              module: 6,
+              state: 0
+            },
+            {
+              module: 7,
+              state: 0
+            }
+          ]
+        })
+        .then(
+          data => {
+            this.setState(
+              {
+                turnstile: data.data,
+                trigger: 1,
+                seria: 1, //TODO: make right
+                trigger_state: 1,
+                selectOne: data.data.page_view.module_selectors[0].state,
+                selectTwo: data.data.page_view.module_selectors[1].state,
+                selectThree: data.data.page_view.module_selectors[2].state,
+                selectFour: data.data.page_view.module_selectors[3].state,
+                selectFive: data.data.page_view.module_selectors[4].state,
+                selectSix: data.data.page_view.module_selectors[5].state,
+                selectSeven: data.data.page_view.module_selectors[6].state,
+                selectEight: data.data.page_view.module_selectors[7].state,
+                loadingData: true
+              },
+              () => {
+                let idx = 1;
+                for (let v of data.data.page_view.seria_buttons) {
+                  if (v.state === 1) {
+                    S.state.seria = idx;
+                  }
+                  idx++;
+                }
+              }
+            );
+          },
+          error => {
+            this.setState({
+              loadingData: true,
+              error
+            });
+          }
+        )
+        .catch(err => err);
+    } else {
+      axios
+        .get(`${site}/turnstile${window.location.search}`)
+        .then(
+          data => {
+            this.setState(
+              {
+                turnstile: data.data,
+                trigger: this.state.trigger,
+                ///seria: this.state.seria,
+                trigger_state: 1,
+                selectOne: data.data.page_view.module_selectors[0].state,
+                selectTwo: data.data.page_view.module_selectors[1].state,
+                selectThree: data.data.page_view.module_selectors[2].state,
+                selectFour: data.data.page_view.module_selectors[3].state,
+                selectFive: data.data.page_view.module_selectors[4].state,
+                selectSix: data.data.page_view.module_selectors[5].state,
+                selectSeven: data.data.page_view.module_selectors[6].state,
+                selectEight: data.data.page_view.module_selectors[7].state,
+                loadingData: true
+              },
+              () => {
+                let idx = 1;
+                for (let v of data.data.page_view.seria_buttons) {
+                  if (v.state === 1) {
+                    S.state.seria = idx;
+                  }
+                  idx++;
+                }
+              }
+            );
+          },
+          error => {
+            this.setState({
+              loadingData: true,
+              error
+            });
+          }
+        )
+        .catch(err => err);
+
+      //this.sendDataLeftTopBlockOnServer();
+      //this.sendDataRightTopBlockOnServer();
+      //this.sendDataLeftBottomBlockOnServer();
+      //this.sendDataRightBottomBlockOnServer();
+
+      //this.handleClickOneSelect();
+      //this.handleClickTwoSelect();
+      //this.handleClickThreeSelect();
+      //this.handleClickFourSelect();
+      //this.handleClickFiveSelect();
+      //this.handleClickSixSelect();
+      //this.handleClickEightSelect();
+    }
+  }
+
   render() {
     const { turnstile, loadingData, error } = this.state;
-    //console.log(turnstile.page_view);
+    console.log(turnstile.page_view);
     //console.log(this.state.selectOne)
     //console.log(this.state.selectTwo)
     //console.log(this.state.selectThree)
@@ -1381,7 +1518,6 @@ class Turnstille extends Component {
     } else {
       return (
         <div className="wrapper-main">
-          {/*<p className="main-description">{turnstile.page_view.caption}</p>*/}
           <div className="wrapper-main-content">
             {/****************** LEFT BLOCK ******************/}
           {/*
@@ -1599,7 +1735,7 @@ class Turnstille extends Component {
                     <ul className="list">
                     <div className='list-description'>Состав модели:</div>
                       {turnstile.page_view.model_module_list.map((index, key) => (
-                        <li>{index.caption}</li> 
+                        <li key={index.index}>{index.caption}</li> 
                       ))}
                     </ul>
                   </div>
@@ -1622,8 +1758,32 @@ class Turnstille extends Component {
                     {turnstile.page_view.model_name}
                   </div>
                   <div className='description-choice'>
-                    <div className='description-choice-str'>STR</div>
-                    <div className='description-choice-stx'>STX</div>
+                    {turnstile.page_view.seria_buttons
+                      .slice(0, 1)
+                      .map((index, key) => {
+                        if(index.state === 1) {
+                          return (
+                            <div onClick={this.sendDataLeftTopBlockOnServer} className='description-choice-str open'>STR</div>
+                          )
+                        } else {
+                          return (
+                            <div onClick={this.sendDataLeftTopBlockOnServer} className='description-choice-str open'>STR</div>
+                          )
+                        }
+                      })}
+                      {turnstile.page_view.seria_buttons
+                        .slice(2, 3)
+                        .map((index, key) => {
+                          if(index.state === 1) {
+                            return (
+                              <div className='description-choice-stx open'>STX</div>
+                            )
+                          } else {
+                            return (
+                              <div className='description-choice-stx'>STX</div>
+                            )
+                          }
+                        })}
                   </div>
                   <div className="description-price">
                     {turnstile.page_view.model_price}
@@ -1645,7 +1805,7 @@ class Turnstille extends Component {
                 </div>
                 <div className='right-block__bottom-description__options'>
                   <div className='right-block__bottom-description__options__choice-optoins'>+ 4 ОПЦИИ</div>
-                  <div onClick={this.resetOptions} className='right-block__bottom-description__options__clear-options'>СБРОСИТЬ</div>
+                  <div onClick={this.clearOptions} className='right-block__bottom-description__options__clear-options'>СБРОСИТЬ</div>
                 </div>
               </div>
               <div className='right-block__center'>
@@ -1696,7 +1856,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-one'></div>
                               Универсальный сетевой контроллер расширения EP-2000{/*{index.caption}*/}
                                 <div className='right-block__select-description__more-info'>
-                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-ep'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1730,7 +1890,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-one'></div>
                               Универсальный сетевой контроллер расширения EP-2000
                                 <div className='right-block__select-description__more-info'>
-                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                  <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-ep'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1773,7 +1933,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-two'></div>
                               RFID идентификаторы EMMarin 125 kHZ{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-emmarin'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1807,7 +1967,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-two'></div>
                             RFID идентификаторы EMMarin 125 kHZ{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-emmarin'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1849,7 +2009,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-three'></div>
                             RFID идентификаторы Mifare 13.56MHz{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-mifare'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1883,7 +2043,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-three'></div>
                             RFID идентификаторы Mifare 13.56MHz{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-mifare'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1925,7 +2085,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-four'></div>
                             Биометрическая идентификация по отпечаткам пальцев{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-bio'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -1959,7 +2119,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-four'></div>
                             Биометрическая идентификация по отпечаткам пальцев{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-bio'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2000,7 +2160,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-five'></div>
                             Информационный дисплей учета рабочего времени{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-time'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2034,7 +2194,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-five'></div>
                             Информационный дисплей учета рабочего времени{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-time'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2075,7 +2235,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-six'></div>
                             Контроль разовых посещений по 2D штрих-кодам{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-single-visit'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2109,7 +2269,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-six'></div>
                             Контроль разовых посещений по 2D штрих-кодам{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-single-visit'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2150,7 +2310,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-seven'></div>
                             Гостевой доступ по 2D штрих-кодам{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-guest2d'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2184,7 +2344,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-seven'></div>
                             Гостевой доступ по 2D штрих-кодам{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-guest2d'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2226,7 +2386,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-eight'></div>
                             Корпус кожуха из нержавеющей стали{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-steel-case'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2260,7 +2420,7 @@ class Turnstille extends Component {
                             <div className='right-block__select-description__photo-eight'></div>
                             Корпус кожуха из нержавеющей стали{/*{index.caption}*/}
                               <div className='right-block__select-description__more-info'>
-                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
+                                <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup-steel-case'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
                               </div>{/*{index.caption}*/}
                           </div>
@@ -2287,6 +2447,7 @@ class Turnstille extends Component {
                     }
                   })}
                   {/** =================== BLOCK 9 =================== */}
+                  {/*
                   {turnstile.page_view.module_selectors
                     .slice(7, 8)  //(8, 9)
                     .map((index, key) => {
@@ -2298,11 +2459,11 @@ class Turnstille extends Component {
                               className="right-block__select-description"
                             >
                               <div className='right-block__select-description__photo-nine'></div>
-                                Конвертер расширения интерфейса Ethernet{/*{index.caption}*/}
+                                Конвертер расширения интерфейса Ethernet{/*{index.caption}
                                 <div className='right-block__select-description__more-info'>
                                   <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
                                   <div className='right-block__select-description__more-info__arrow'></div>
-                                </div>{/*{index.caption}*/}
+                                </div>{/*{index.caption}
                             </div>
                             <div className='right-block__select-description__plus-price'>+10000</div>
                             <div className="onoffswitch9">
@@ -2332,11 +2493,11 @@ class Turnstille extends Component {
                               className="right-block__select-description"
                             >
                               <div className='right-block__select-description__photo-nine'></div>
-                              Конвертер расширения интерфейса Ethernet{/*{index.caption}*/}
+                              Конвертер расширения интерфейса Ethernet{/*{index.caption}
                               <div className='right-block__select-description__more-info'>
                                 <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
-                              </div>{/*{index.caption}*/}
+                              </div>{/*{index.caption}
                             </div>
                             <div className='right-block__select-description__plus-price'>+10000</div>
                             <div className="onoffswitch9">
@@ -2360,7 +2521,9 @@ class Turnstille extends Component {
                         );
                       }
                     })}
+                  */}
                   {/** =================== BLOCK 10 =================== */}
+                  {/*
                   {turnstile.page_view.module_selectors
                     .slice(7, 8) //(9, 10)
                     .map((index, key) => {
@@ -2372,11 +2535,11 @@ class Turnstille extends Component {
                               className="right-block__select-description"
                             >
                               <div className='right-block__select-description__photo-ten'></div>
-                              Контроллер расширения Bluetooth{/*{index.caption}*/}
+                              Контроллер расширения Bluetooth{/*{index.caption}
                               <div className='right-block__select-description__more-info'>
                                 <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
-                              </div>{/*{index.caption}*/}
+                              </div>{/*{index.caption}
                             </div>
                             <div className='right-block__select-description__plus-price'>+10000</div>
                             <div className="onoffswitch10">
@@ -2406,11 +2569,11 @@ class Turnstille extends Component {
                               className="right-block__select-description"
                             >
                               <div className='right-block__select-description__photo-ten'></div>
-                              Контроллер расширения Bluetooth{/*{index.caption}*/}
+                              Контроллер расширения Bluetooth{/*{index.caption}
                               <div className='right-block__select-description__more-info'>
                                 <Link style={{textDecoration: 'none', color: '#1d68d9'}} to='/popup'>ПОДРОБНЕЕ</Link>
                                 <div className='right-block__select-description__more-info__arrow'></div>
-                              </div>{/*{index.caption}*/}
+                              </div>{/*{index.caption}
                             </div>
                             <div className='right-block__select-description__plus-price'>+10000</div>
                             <div className="onoffswitch10">

@@ -113,7 +113,7 @@
     justify-content: flex-start;
     align-items: center;
     //padding: 10px;
-    width: 45%;
+    width: 40%;
     //height: 80vh;
     .center-block__top {
         width: 360px;
@@ -123,7 +123,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        width: 50%;
+        //width: 50%;
         margin-top: 5vh;
         .arrow-left {
             width: 30px;
@@ -215,7 +215,7 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        width: 100%;
+        width: 98%;
         height: 18%;
         padding-bottom: 19px;
         border-bottom: 1px solid #efefef;
@@ -268,7 +268,7 @@
               text-align: center;
               border-radius: 20px;
               padding: 5px 0;
-              border: solid 2px #1d68d9;
+              border: solid 2px transparent;
               background-color: #ffffff;
               width: 50%;
               &:hover {
@@ -282,6 +282,7 @@
               border-radius: 20px;
               padding: 5px 0;
               width: 50%;
+              border: solid 2px transparent;
               &:hover {
                 color: #1d68d9;
                 //border: 2px solid transparent;
@@ -358,6 +359,7 @@
             letter-spacing: 0.5px;
             border-bottom: 1px solid #8b9298;
             color: #8b9298;
+            cursor: pointer;
           }
         }
     }
@@ -366,7 +368,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: 98%;
       max-width: 100%;
 
       .right-block__center-description {
@@ -436,16 +438,19 @@
         align-items: center;
         width: 100%;
         height: 100%;
+        overflow: scroll;
+        //z-index: 10000;
         .wrapper-select {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
             padding: 7px;
-            width: 100%;
+            width: 98%;
             &:hover {
               border-radius: 25px;
               background-color: #ebeff3;
+              z-index: 10000;
             }
             //border: 1px solid grey;
             .right-block__select-description {
@@ -1241,4 +1246,13 @@
 //   padding: 7px;
 //   outline: none;
 // }
+//.control-arrow .control-prev {
+//  display: none;
+//  width: 0;
+//  color: transparent;
+//  visibility: hidden;
+//}
+.control-arrow .control-next {
+  display: none;
+}
 .carousel .slide img { width: auto!important; }
