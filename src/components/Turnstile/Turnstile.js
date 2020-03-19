@@ -19,6 +19,8 @@ class Turnstille extends Component {
       loadingData: false,
       app_id: "0",
       seria: 0,
+      button_seria_state: 0,
+      button_corpse_state: 0,
       trigger: 0,
       trigger_state: 0,
       state: 0,
@@ -49,20 +51,35 @@ class Turnstille extends Component {
       selectEight: 0,
       selectNine: 0,
       selectTen: 0,
+      module_main_photo: null,
+      module_price: 0,
       error: null
     };
   }
 
   componentDidMount() {
-    let S = this;
-
+    //let S = this;
+    document.addEventListener('keydown', event => {
+      if(event.keyCode === 27) {
+        this.handleCloseModalOne();
+        this.handleCloseModalTwo();
+        this.handleCloseModalThree();
+        this.handleCloseModalFour();
+        this.handleCloseModalFive();
+        this.handleCloseModalSix();
+        this.handleCloseModalSeven();
+        this.handleCloseModalEight()
+      }
+    });
     if (window.location.search === "") {
       axios
         .post(`${site}/turnstile`, {
-          app_id: "UUID1",
-          trigger: 0,
+          app_id: "UUID0",
+          trigger: 1,
           trigger_state: 1,
           seria: 0,
+          button_seria_state: this.state.button_seria_state,
+          button_corpse_state: this.state.button_corpse_state,
           module_selectors: [
             {
               module: 0,
@@ -104,7 +121,9 @@ class Turnstille extends Component {
               {
                 turnstile: data.data,
                 trigger: 1,
-                seria: 1, //TODO: make right
+                seria: this.state.seria, //TODO: make right
+                button_seria_state: data.data.page_view.button_seria,
+                button_corpse_state: data.data.page_view.button_corpse,
                 trigger_state: 1,
                 selectOne: data.data.page_view.module_selectors[0].state,
                 selectTwo: data.data.page_view.module_selectors[1].state,
@@ -115,15 +134,6 @@ class Turnstille extends Component {
                 selectSeven: data.data.page_view.module_selectors[6].state,
                 selectEight: data.data.page_view.module_selectors[7].state,
                 loadingData: true
-              },
-              () => {
-                let idx = 1;
-                for (let v of data.data.page_view.seria_buttons) {
-                  if (v.state === 1) {
-                    S.state.seria = idx;
-                  }
-                  idx++;
-                }
               }
             );
           },
@@ -144,7 +154,9 @@ class Turnstille extends Component {
               {
                 turnstile: data.data,
                 trigger: this.state.trigger,
-                ///seria: this.state.seria,
+                seria: this.state.seria,
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
                 trigger_state: 1,
                 selectOne: data.data.page_view.module_selectors[0].state,
                 selectTwo: data.data.page_view.module_selectors[1].state,
@@ -155,15 +167,6 @@ class Turnstille extends Component {
                 selectSeven: data.data.page_view.module_selectors[6].state,
                 selectEight: data.data.page_view.module_selectors[7].state,
                 loadingData: true
-              },
-              () => {
-                let idx = 1;
-                for (let v of data.data.page_view.seria_buttons) {
-                  if (v.state === 1) {
-                    S.state.seria = idx;
-                  }
-                  idx++;
-                }
               }
             );
           },
@@ -181,15 +184,15 @@ class Turnstille extends Component {
   // SEND DATA TOP LEFT BLOCK
 
   sendDataLeftTopBlockOnServer = () => {
-    //let element = document.getElementsByClassName("right-block__center-button__left-button")[0];
-    //element.classList.toggle("open");
     let S = this;
     axios
       .post(`${site}/turnstile`, {
         app_id: "UUID1",
         trigger: 1,
         trigger_state: 1,
-        //seria: 1,
+        button_seria_state: this.state.button_seria_state,
+        button_corpse_state: this.state.button_corpse_state,
+        seria: 0,
         module_selectors: [
           {
             module: 0,
@@ -232,7 +235,9 @@ class Turnstille extends Component {
               turnstile: data.data,
               trigger: 1,
               trigger_state: 1,
-              seria: 1,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
+              seria: 0,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -244,13 +249,12 @@ class Turnstille extends Component {
               loadingData: true
             },
             () => {
-              let idx = 1;
-              for (let v of data.data.page_view.seria_buttons) {
-                if (v.seria === 1) {
-                  S.state.seria = idx;
-                }
-                idx++;
-              }
+              S.setState({
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
+                trigger: 1,
+                trigger_state: 1
+              })
             }
           );
         },
@@ -267,15 +271,15 @@ class Turnstille extends Component {
   // SEND DATA TOP RIGHT BLOCK
 
   sendDataRightTopBlockOnServer = e => {
-    //let element = document.getElementsByClassName("right-block__center-button__right-button")[0];
-    //element.classList.toggle("open");
     let S = this;
     axios
       .post(`${site}/turnstile`, {
         app_id: "UUID2",
         trigger: 2,
         trigger_state: 1,
-        //seria: 2,
+        seria: 0,
+        button_seria_state: this.state.button_seria_state,
+        button_corpse_state: this.state.button_corpse_state,
         module_selectors: [
           {
             module: 0,
@@ -318,7 +322,9 @@ class Turnstille extends Component {
               turnstile: data.data,
               trigger: 2,
               trigger_state: 1,
-              seria: 2,
+              seria: 0,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -328,15 +334,13 @@ class Turnstille extends Component {
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state,
               loadingData: true
-            },
-            () => {
-              let idx = 2;
-              for (let v of data.data.page_view.seria_buttons) {
-                if (v.seria === 2) {
-                  S.state.seria = idx;
-                }
-                idx++;
-              }
+            }, () => {
+              S.setState({
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
+                trigger: 2,
+                trigger_state: 1
+              })
             }
           );
         },
@@ -359,7 +363,9 @@ class Turnstille extends Component {
         app_id: "UUID3",
         trigger: 3,
         trigger_state: 1,
-        //seria: 3,
+        seria: 0,
+        button_seria_state: this.state.button_seria_state,
+        button_corpse_state: this.state.button_corpse_state,
         module_selectors: [
           {
             module: 0,
@@ -402,7 +408,9 @@ class Turnstille extends Component {
               turnstile: data.data,
               trigger: 3,
               trigger_state: 1,
-              seria: 3,
+              seria: 0,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -414,13 +422,12 @@ class Turnstille extends Component {
               loadingData: true
             },
             () => {
-              let idx = 3;
-              for (let v of data.data.page_view.seria_buttons) {
-                if (v.seria === 3) {
-                  S.state.seria = idx;
-                }
-                idx++;
-              }
+              S.setState({
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
+                trigger: 3,
+                trigger_state: 1
+              })
             }
           );
         },
@@ -443,7 +450,9 @@ class Turnstille extends Component {
         app_id: "UUID4",
         trigger: 4,
         trigger_state: 1,
-        //seria: 4,
+        seria: 0,
+        button_seria_state: this.state.button_seria_state,
+        button_corpse_state: this.state.button_corpse_state,
         module_selectors: [
           {
             module: 0,
@@ -486,7 +495,9 @@ class Turnstille extends Component {
               turnstile: data.data,
               trigger: 4,
               trigger_state: 1,
-              seria: 4,
+              seria: 0,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -496,15 +507,13 @@ class Turnstille extends Component {
               selectSeven: data.data.page_view.module_selectors[6].state,
               selectEight: data.data.page_view.module_selectors[7].state,
               loadingData: true
-            },
-            () => {
-              let idx = 3;
-              for (let v of data.data.page_view.seria_buttons) {
-                if (v.seria === 3) {
-                  S.state.seria = idx;
-                }
-                idx++;
-              }
+            },() => {
+              S.setState({
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
+                trigger: 3,
+                trigger_state: 1
+              })
             }
           );
         },
@@ -517,9 +526,6 @@ class Turnstille extends Component {
       )
       .catch(err => err);
   };
-  //resetOptions = () => {
-  //  this.componentDidMount();
-  //}
 
   // RIGHT BLOCK SELECTORS
 
@@ -547,6 +553,8 @@ class Turnstille extends Component {
           app_id: "UUID5",
           trigger: 5,
           trigger_state: Self.state.selectOne,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           seria: Self.state.seria,
           module_selectors: [
             {
@@ -588,6 +596,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 5,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -633,6 +643,8 @@ class Turnstille extends Component {
         .post(`${site}/turnstile`, {
           app_id: "UUID6",
           trigger: 6,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectTwo,
           seria: Self.state.seria,
           module_selectors: [
@@ -675,6 +687,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 6,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -719,6 +733,8 @@ class Turnstille extends Component {
         .post(`${site}/turnstile`, {
           app_id: "UUID7",
           trigger: 7,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectThree,
           seria: Self.state.seria,
           module_selectors: [
@@ -761,6 +777,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 7,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -805,6 +823,8 @@ class Turnstille extends Component {
         .post(`${site}/turnstile`, {
           app_id: "UUID8",
           trigger: 8,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectFour,
           seria: Self.state.seria,
           module_selectors: [
@@ -847,6 +867,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 8,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -888,8 +910,10 @@ class Turnstille extends Component {
     function send() {
       axios
         .post(`${site}/turnstile`, {
-          app_id: "UUID5",
+          app_id: "UUID9",
           trigger: 9,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectFive,
           seria: Self.state.seria,
           module_selectors: [
@@ -932,6 +956,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 9,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -973,8 +999,10 @@ class Turnstille extends Component {
     function send() {
       axios
         .post(`${site}/turnstile`, {
-          app_id: "UUID5",
+          app_id: "UUID10",
           trigger: 10,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectSix,
           seria: Self.state.seria,
           module_selectors: [
@@ -1017,6 +1045,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 10,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -1058,8 +1088,10 @@ class Turnstille extends Component {
     function send() {
       axios
         .post(`${site}/turnstile`, {
-          app_id: "UUID5",
+          app_id: "UUID11",
           trigger: 11,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectSeven,
           seria: Self.state.seria,
           module_selectors: [
@@ -1102,6 +1134,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 11,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -1143,8 +1177,10 @@ class Turnstille extends Component {
     function send() {
       axios
         .post(`${site}/turnstile`, {
-          app_id: "UUID5",
+          app_id: "UUID12",
           trigger: 12,
+          button_seria_state: Self.state.button_seria_state,
+          button_corpse_state: Self.state.button_corpse_state,
           trigger_state: Self.state.selectEight,
           seria: Self.state.seria,
           module_selectors: [
@@ -1187,6 +1223,8 @@ class Turnstille extends Component {
             Self.setState({
               turnstile: data.data,
               trigger: 12,
+              button_seria_state: data.data.page_view.btn_seria,
+              button_corpse_state: data.data.page_view.btn_corpse,
               selectOne: data.data.page_view.module_selectors[0].state,
               selectTwo: data.data.page_view.module_selectors[1].state,
               selectThree: data.data.page_view.module_selectors[2].state,
@@ -1207,239 +1245,242 @@ class Turnstille extends Component {
         .catch(err => err);
     }
   };
-  handleClickNineSelect = () => {
-    this.handleCloseModalOne();
-    this.handleCloseModalTwo()
-    this.handleCloseModalThree();
-    this.handleCloseModalFour();
-    this.handleCloseModalFive();
-    this.handleCloseModalSix();
-    this.handleCloseModalSeven();
-    this.handleCloseModalEight();
-    let Self = this;
-    this.setState(
-      {
-        selectNine: +!this.state.selectNine
-      },
-      () => {
-        send();
-      }
-    );
-    function send() {
-      axios
-        .post(`${site}/turnstile`, {
-          app_id: "UUID5",
-          trigger: 13,
-          trigger_state: Self.state.selectNine,
-          seria: Self.state.seria,
-          module_selectors: [
-            {
-              module: 0,
-              state: Self.state.selectOne
-            },
-            {
-              module: 1,
-              state: Self.state.selectTwo
-            },
-            {
-              module: 2,
-              state: Self.state.selectThree
-            },
-            {
-              module: 3,
-              state: Self.state.selectFour
-            },
-            {
-              module: 4,
-              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
-            },
-            {
-              module: 5,
-              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
-            },
-            {
-              module: 6,
-              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
-            },
-            {
-              module: 7,
-              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
-            },
-            {
-              module: 8,
-              state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
-            },
-            {
-              module: 9,
-              state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
-            }
-          ]
-        })
-        .then(
-          data => {
-            Self.setState({
-              turnstile: data.data,
-              trigger: 13,
-              selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo: data.data.page_view.module_selectors[1].state,
-              selectThree: data.data.page_view.module_selectors[2].state,
-              selectFour: data.data.page_view.module_selectors[3].state,
-              selectFive: data.data.page_view.module_selectors[4].state,
-              selectSix: data.data.page_view.module_selectors[5].state,
-              selectSeven: data.data.page_view.module_selectors[6].state,
-              selectEight: data.data.page_view.module_selectors[7].state,
-              selectNine: data.data.page_view.module_selectors[8].state,
-              selectTen: data.data.page_view.module_selectors[9].state
-            });
-          },
-          error => {
-            Self.setState({
-              loadingData: true,
-              error
-            });
-          }
-        )
-        .catch(err => err);
-    }
-  };
-  handleClickTenSelect = () => {
-    this.handleCloseModalOne();
-    this.handleCloseModalTwo()
-    this.handleCloseModalThree();
-    this.handleCloseModalFour();
-    this.handleCloseModalFive();
-    this.handleCloseModalSix();
-    this.handleCloseModalSeven();
-    this.handleCloseModalEight();
-    let Self = this;
-    this.setState(
-      {
-        selectTen: +!this.state.selectTen
-      },
-      () => {
-        send();
-      }
-    );
-    function send() {
-      axios
-        .post(`${site}/turnstile`, {
-          app_id: "UUID5",
-          trigger: 14,
-          trigger_state: Self.state.selectTen,
-          seria: Self.state.seria,
-          module_selectors: [
-            {
-              module: 0,
-              state: Self.state.selectOne
-            },
-            {
-              module: 1,
-              state: Self.state.selectTwo
-            },
-            {
-              module: 2,
-              state: Self.state.selectThree
-            },
-            {
-              module: 3,
-              state: Self.state.selectFour
-            },
-            {
-              module: 4,
-              state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
-            },
-            {
-              module: 5,
-              state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
-            },
-            {
-              module: 6,
-              state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
-            },
-            {
-              module: 7,
-              state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
-            },
-            {
-              module: 8,
-              state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
-            },
-            {
-              module: 9,
-              state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
-            }
-          ]
-        })
-        .then(
-          data => {
-            Self.setState({
-              turnstile: data.data,
-              trigger: 14,
-              selectOne: data.data.page_view.module_selectors[0].state,
-              selectTwo: data.data.page_view.module_selectors[1].state,
-              selectThree: data.data.page_view.module_selectors[2].state,
-              selectFour: data.data.page_view.module_selectors[3].state,
-              selectFive: data.data.page_view.module_selectors[4].state,
-              selectSix: data.data.page_view.module_selectors[5].state,
-              selectSeven: data.data.page_view.module_selectors[6].state,
-              selectEight: data.data.page_view.module_selectors[7].state,
-              selectNine: data.data.page_view.module_selectors[8].state,
-              selectTen: data.data.page_view.module_selectors[9].state
-            });
-          },
-          error => {
-            Self.setState({
-              loadingData: true,
-              error
-            });
-          }
-        )
-        .catch(err => err);
-    }
-  };
+  // handleClickNineSelect = () => {
+  //   this.handleCloseModalOne();
+  //   this.handleCloseModalTwo()
+  //   this.handleCloseModalThree();
+  //   this.handleCloseModalFour();
+  //   this.handleCloseModalFive();
+  //   this.handleCloseModalSix();
+  //   this.handleCloseModalSeven();
+  //   this.handleCloseModalEight();
+  //   let Self = this;
+  //   this.setState(
+  //     {
+  //       selectNine: +!this.state.selectNine
+  //     },
+  //     () => {
+  //       send();
+  //     }
+  //   );
+  //   function send() {
+  //     axios
+  //       .post(`${site}/turnstile`, {
+  //         app_id: "UUID13",
+  //         trigger: 13,
+  //         trigger_state: Self.state.selectNine,
+  //         seria: Self.state.seria,
+  //         module_selectors: [
+  //           {
+  //             module: 0,
+  //             state: Self.state.selectOne
+  //           },
+  //           {
+  //             module: 1,
+  //             state: Self.state.selectTwo
+  //           },
+  //           {
+  //             module: 2,
+  //             state: Self.state.selectThree
+  //           },
+  //           {
+  //             module: 3,
+  //             state: Self.state.selectFour
+  //           },
+  //           {
+  //             module: 4,
+  //             state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+  //           },
+  //           {
+  //             module: 5,
+  //             state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+  //           },
+  //           {
+  //             module: 6,
+  //             state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+  //           },
+  //           {
+  //             module: 7,
+  //             state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+  //           },
+  //           {
+  //             module: 8,
+  //             state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
+  //           },
+  //           {
+  //             module: 9,
+  //             state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
+  //           }
+  //         ]
+  //       })
+  //       .then(
+  //         data => {
+  //           Self.setState({
+  //             turnstile: data.data,
+  //             trigger: 13,
+  //             selectOne: data.data.page_view.module_selectors[0].state,
+  //             selectTwo: data.data.page_view.module_selectors[1].state,
+  //             selectThree: data.data.page_view.module_selectors[2].state,
+  //             selectFour: data.data.page_view.module_selectors[3].state,
+  //             selectFive: data.data.page_view.module_selectors[4].state,
+  //             selectSix: data.data.page_view.module_selectors[5].state,
+  //             selectSeven: data.data.page_view.module_selectors[6].state,
+  //             selectEight: data.data.page_view.module_selectors[7].state,
+  //             selectNine: data.data.page_view.module_selectors[8].state,
+  //             selectTen: data.data.page_view.module_selectors[9].state
+  //           });
+  //         },
+  //         error => {
+  //           Self.setState({
+  //             loadingData: true,
+  //             error
+  //           });
+  //         }
+  //       )
+  //       .catch(err => err);
+  //   }
+  // };
+  // handleClickTenSelect = () => {
+  //   this.handleCloseModalOne();
+  //   this.handleCloseModalTwo()
+  //   this.handleCloseModalThree();
+  //   this.handleCloseModalFour();
+  //   this.handleCloseModalFive();
+  //   this.handleCloseModalSix();
+  //   this.handleCloseModalSeven();
+  //   this.handleCloseModalEight();
+  //   let Self = this;
+  //   this.setState(
+  //     {
+  //       selectTen: +!this.state.selectTen
+  //     },
+  //     () => {
+  //       send();
+  //     }
+  //   );
+  //   function send() {
+  //     axios
+  //       .post(`${site}/turnstile`, {
+  //         app_id: "UUID14",
+  //         trigger: 14,
+  //         trigger_state: Self.state.selectTen,
+  //         seria: Self.state.seria,
+  //         module_selectors: [
+  //           {
+  //             module: 0,
+  //             state: Self.state.selectOne
+  //           },
+  //           {
+  //             module: 1,
+  //             state: Self.state.selectTwo
+  //           },
+  //           {
+  //             module: 2,
+  //             state: Self.state.selectThree
+  //           },
+  //           {
+  //             module: 3,
+  //             state: Self.state.selectFour
+  //           },
+  //           {
+  //             module: 4,
+  //             state: Self.state.selectFive < 0 ? 0 : Self.state.selectFive
+  //           },
+  //           {
+  //             module: 5,
+  //             state: Self.state.selectSix < 0 ? 0 : Self.state.selectSix
+  //           },
+  //           {
+  //             module: 6,
+  //             state: Self.state.selectSeven < 0 ? 0 : Self.state.selectSeven
+  //           },
+  //           {
+  //             module: 7,
+  //             state: Self.state.selectEight < 0 ? 0 : Self.state.selectEight
+  //           },
+  //           {
+  //             module: 8,
+  //             state: Self.state.selectNine < 0 ? 0 : Self.state.selectNine
+  //           },
+  //           {
+  //             module: 9,
+  //             state: Self.state.selectTen < 0 ? 0 : Self.state.selectTen
+  //           }
+  //         ]
+  //       })
+  //       .then(
+  //         data => {
+  //           Self.setState({
+  //             turnstile: data.data,
+  //             trigger: 14,
+  //             selectOne: data.data.page_view.module_selectors[0].state,
+  //             selectTwo: data.data.page_view.module_selectors[1].state,
+  //             selectThree: data.data.page_view.module_selectors[2].state,
+  //             selectFour: data.data.page_view.module_selectors[3].state,
+  //             selectFive: data.data.page_view.module_selectors[4].state,
+  //             selectSix: data.data.page_view.module_selectors[5].state,
+  //             selectSeven: data.data.page_view.module_selectors[6].state,
+  //             selectEight: data.data.page_view.module_selectors[7].state,
+  //             selectNine: data.data.page_view.module_selectors[8].state,
+  //             selectTen: data.data.page_view.module_selectors[9].state
+  //           });
+  //         },
+  //         error => {
+  //           Self.setState({
+  //             loadingData: true,
+  //             error
+  //           });
+  //         }
+  //       )
+  //       .catch(err => err);
+  //   }
+  // };
 
   clearOptions = () => {
     localStorage.clear()
-    let S = this;
+    //let S = this;
     if (window.location.search === "") {
       axios
         .post(`${site}/turnstile`, {
-          //app_id: "UUID1",
-          //trigger: 0,
+          //app_id: "UUIDclear",
+          trigger: this.state.trigger,
           //trigger_state: 1,
           //seria: 0,
+          button_seria_state : this.state.button_seria_state, 
+          button_corpse_state : this.state.button_corpse_state, 
+          reset_model : 1, 
           module_selectors: [
             {
-              module: 0,
-              state: 0
+              "module": 0,
+              "state": 0
             },
             {
-              module: 1,
-              state: 0
+              "module": 1,
+              "state": 0
             },
             {
-              module: 2,
-              state: 0
+              "module": 2,
+              "state": 0
             },
             {
-              module: 3,
-              state: 0
+              "module": 3,
+              "state": 0
             },
             {
-              module: 4,
-              state: 0
+              "module": 4,
+              "state": 0
             },
             {
-              module: 5,
-              state: 0
+              "module": 5,
+              "state": 0
             },
             {
-              module: 6,
-              state: 0
+              "module": 6,
+              "state": 0
             },
             {
-              module: 7,
-              state: 0
+              "module": 7,
+              "state": 0
             }
           ]
         })
@@ -1448,9 +1489,9 @@ class Turnstille extends Component {
             this.setState(
               {
                 turnstile: data.data,
-                trigger: 2,
-                //seria: 1, //TODO: make right
-                //trigger_state: 1,
+                trigger: 12,
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
                 selectOne: data.data.page_view.module_selectors[0].state,
                 selectTwo: data.data.page_view.module_selectors[1].state,
                 selectThree: data.data.page_view.module_selectors[2].state,
@@ -1461,15 +1502,15 @@ class Turnstille extends Component {
                 selectEight: data.data.page_view.module_selectors[7].state,
                 loadingData: true
               },
-              () => {
-                let idx = 1;
-                for (let v of data.data.page_view.seria_buttons) {
-                  if (v.state === 1) {
-                    S.state.seria = idx;
-                  }
-                  idx++;
-                }
-              }
+              // () => {
+              //   let idx = 1;
+              //   for (let v of data.data.page_view.seria_buttons) {
+              //     if (v.state === 1) {
+              //       S.state.seria = idx;
+              //     }
+              //     idx++;
+              //   }
+              // }
             );
           },
           error => {
@@ -1488,8 +1529,9 @@ class Turnstille extends Component {
             this.setState(
               {
                 turnstile: data.data,
-                trigger: 2,
-                //trigger_state: 1,
+                trigger: 12,
+                button_seria_state: data.data.page_view.btn_seria,
+                button_corpse_state: data.data.page_view.btn_corpse,
                 selectOne: data.data.page_view.module_selectors[0].state,
                 selectTwo: data.data.page_view.module_selectors[1].state,
                 selectThree: data.data.page_view.module_selectors[2].state,
@@ -1500,15 +1542,15 @@ class Turnstille extends Component {
                 selectEight: data.data.page_view.module_selectors[7].state,
                 loadingData: true
               },
-              () => {
-                let idx = 1;
-                for (let v of data.data.page_view.seria_buttons) {
-                  if (v.state === 1) {
-                    S.state.seria = idx;
-                  }
-                  idx++;
-                }
-              }
+              // () => {
+              //   let idx = 1;
+              //   for (let v of data.data.page_view.seria_buttons) {
+              //     if (v.state === 1) {
+              //       S.state.seria = idx;
+              //     }
+              //     idx++;
+              //   }
+              // }
             );
           },
           error => {
@@ -1524,27 +1566,131 @@ class Turnstille extends Component {
 
   handleOpenModalOne = () => {
     this.setState({ modalOpenOne: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL1",
+      trigger: 5,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalTwo = () => {
     this.setState({ modalOpenTwo: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL2",
+      trigger: 6,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalThree = () => {
     this.setState({ modalOpenThree: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL3",
+      trigger: 7,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalFour = () => {
     this.setState({ modalOpenFour: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL4",
+      trigger: 8,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalFive = () => {
     this.setState({ modalOpenFive: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL5",
+      trigger: 9,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalSix = () => {
     this.setState({ modalOpenSix: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL6",
+      trigger: 10,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalSeven = () => {
     this.setState({ modalOpenSeven: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL7",
+      trigger: 11,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalEight = () => {
     this.setState({ modalOpenEight: true });
+    axios.post(`${site}/turnstile/module`, {
+      app_id: "UUIDMODAL8",
+      trigger: 12,
+	    button_seria_state : this.state.button_seria_state, 
+      button_corpse_state : this.state.button_corpse_state
+    })
+    .then(data => {
+      this.setState({
+        module_main_photo: data.data.module_main_photo,
+        module_price: data.data.module_price
+      })
+    })
+    .catch(err => console.log('Error: ' + err))
   };
 
   handleCloseModalOne = () => {
@@ -1631,12 +1777,18 @@ class Turnstille extends Component {
       characteristicsFive,
       characteristicsSix, 
       characteristicsSeven, 
-      characteristicsEight, 
+      characteristicsEight,
+      module_main_photo,
+      module_price,
       error
     } = this.state;
     let data = JSON.stringify(turnstile.page_view)
-    localStorage.setItem('data', data)
-    console.log(turnstile.page_view);
+    localStorage.setItem('data', data)    //console.log("Trigger " + this.state.trigger)
+    //console.log("REQ_BTN_SERIA " + this.state.button_seria_state, "REQ_BTN_CORPSE " + this.state.button_corpse_state)
+    //console.log("DATA_BTN_SERIA " + turnstile.page_view.btn_seria, "DATA_BTN_CORPSE " + turnstile.page_view.btn_corpse)
+    //console.log(turnstile.page_view ? "RES_DATA_BTN_SERIA " + turnstile.page_view.btn_seria : null);
+    //console.log(turnstile.page_view ? "RES_DATA_BTN_CORPSE " + turnstile.page_view.btn_corpse : null);
+    //console.log(turnstile.page_view)
     //console.log(localStorage);
     //console.log(this.state.selectOne)
     //console.log(this.state.selectTwo)
@@ -1646,25 +1798,23 @@ class Turnstille extends Component {
     //console.log(this.state.selectSix)
     //console.log(this.state.selectSeven)
     //console.log(this.state.selectEight)
-    //console.log("Trigger " + this.state.trigger)
     //console.log(this.state)
+    //console.log(module_main_photo)
+    //console.log(module_price)
 
     let photoOne = turnstile.page_view
-      ? turnstile.page_view.carousel_images[0].image_source
+      ? turnstile.page_view.model_main_photo
       : null;
-    photoOne = site + photoOne;
+    //photoOne = site + photoOne;
 
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!loadingData) {
       return <Loader />;
-    } else if (window.location.search === "?model=4" || turnstile === null) {
-      return (
-        <>
-          <h4>Здесь и дальше Вы не увидите того, что Вам нужно.</h4>
-          <Loader />
-        </>
-      );
+    } else if(turnstile.result.code === -1 || turnstile.length === 0) { // FOR WINDOW.LOCATION ?model=(NOT FOUND)
+      return (<div>PAGE NOT FOUND</div>)
+    } else if (window.location.search === "?model=6" || turnstile === null) {
+      return (<div>CТРАНИЦА НЕ НАЙДЕНА</div>);
     } else {
       return (
         <div className="wrapper-main">
@@ -1705,54 +1855,51 @@ class Turnstille extends Component {
                     {turnstile.page_view.model_name}
                   </div>
                   <div className="description-choice">
-                    {turnstile.page_view.seria_buttons
-                      .slice(0, 1)
-                      .map((index, key) => {
-                        if (index.state === 1) {
-                          return (
+
+                  {/** ====================== LEFT TOP BLOCK ( STR ) ====================== */}
+                    {turnstile.page_view.btn_seria === 0 
+                      ? 
+                        <>
                             <div
-                              key={index.index}
                               onClick={this.sendDataLeftTopBlockOnServer}
                               className="description-choice-str open"
                             >
                               STR
                             </div>
-                          );
-                        } else {
-                          return (
-                            <div
-                              key={index.index}
+                        </> 
+                      : <>
+                          <div
                               onClick={this.sendDataLeftTopBlockOnServer}
-                              className="description-choice-str open"
+                              className="description-choice-str"
                             >
                               STR
                             </div>
-                          );
-                        }
-                      })}
-                    {turnstile.page_view.seria_buttons
-                      .slice(2, 3)
-                      .map((index, key) => {
-                        if (index.state === 1) {
-                          return (
-                            <div
-                              key={index.index}
-                              className="description-choice-stx open"
-                            >
-                              STX
-                            </div>
-                          );
-                        } else {
-                          return (
-                            <div
-                              key={index.index}
-                              className="description-choice-stx"
-                            >
-                              STX
-                            </div>
-                          );
-                        }
-                      })}
+                        </>
+                    }
+
+                    {/** ====================== RIGHT TOP BLOCK ( STX ) ====================== */}
+
+                    {turnstile.page_view.btn_seria === 1 
+                      ? 
+                        <>
+                          <div
+                            className="description-choice-stx open"
+                            onClick={this.sendDataRightTopBlockOnServer}
+                          >
+                            STX
+                          </div>
+                        </> 
+                      : 
+                        <>
+                          <div
+                            className="description-choice-stx"
+                            onClick={this.sendDataRightTopBlockOnServer}
+                          >
+                            STX
+                          </div>
+                        </>
+                      }
+                    
                   </div>
                   <div className="description-price">
                     {turnstile.page_view.model_price}
@@ -1768,20 +1915,29 @@ class Turnstille extends Component {
                     ПОДРОБНЕЕ О МОДЕЛИ
                     <div className="right-block__select-description__arrow"></div>
                   </a>
-                  <div className="description-model">
-                    БАЗОВАЯ МОДЕЛЬ ({turnstile.page_view ? turnstile.page_view.model_module_list[0].price : null})
-                    {/*{turnstile.page_view.model_name}*/}
-                  </div>
+                  <a 
+                    className="description-model"
+                    href={turnstile.page_view.model_base_model} 
+                    //href={turnstile.page_view.model_name.model_base_model} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{textDecoration: 'none'}}
+                  >
+                      БАЗОВАЯ МОДЕЛЬ {turnstile.page_view.model_module_list.length - 1 >= 1 ? '(' + turnstile.page_view.model_module_list[0].price + ')' : null}
+                    <div className='right-block__select-description__more-info__arrow'></div>
+                  </a>
                 </div>
                 <div className="right-block__bottom-description__options">
                   <div className="right-block__bottom-description__options__choice-optoins">
-                    +{turnstile.page_view.model_module_list.length - 1} ОПЦИИ
+                    {turnstile.page_view.model_module_list.length - 1 === 1 ? String('+') + (turnstile.page_view.model_module_list.length - 1) + ' ОПЦИЯ' : null}
+                    {turnstile.page_view.model_module_list.length - 1 > 1 ? String('+') + (turnstile.page_view.model_module_list.length - 1) + ' ОПЦИИ' : null}
+                    {turnstile.page_view.model_module_list.length - 1 >= 5 ? String('+') + (turnstile.page_view.model_module_list.length - 1) + ' ОПЦИЙ' : null}
                   </div>
                   <div
                     onClick={this.clearOptions}
                     className="right-block__bottom-description__options__clear-options"
                   >
-                    СБРОСИТЬ
+                    {turnstile.page_view.model_module_list.length - 1 >= 1 ? 'СБРОСИТЬ' : null}
                   </div>
                 </div>
               </div>
@@ -1790,56 +1946,50 @@ class Turnstille extends Component {
                   Исполнение
                 </div>
                 <div className="right-block__center-button">
-                  {turnstile.page_view.seria_buttons
-                    .slice(0, 1)
-                    .map((index, key) => {
-                      if (index.state === 1) {
-                        return (
+
+                  {/** ====================== LEFT BOTTOM BLOCK ( COMPACT ) ====================== */}
+                    {turnstile.page_view.btn_corpse === 0 
+                      ? 
+                        <>
                           <div
-                            key={index.index}
-                            onClick={this.sendDataLeftTopBlockOnServer}
+                            onClick={this.sendDataLeftBottomBlockOnServer}
                             className="right-block__center-button__left-button open"
                           >
                             Компактный
                           </div>
-                        );
-                      } else {
-                        return (
+                        </> 
+                      : 
+                        <>
                           <div
-                            key={index.index}
-                            onClick={this.sendDataLeftTopBlockOnServer}
+                            onClick={this.sendDataLeftBottomBlockOnServer}
                             className="right-block__center-button__left-button"
                           >
                             Компактный
                           </div>
-                        );
-                      }
-                    })}
-                  {turnstile.page_view.seria_buttons
-                    .slice(1, 2)
-                    .map((index, key) => {
-                      if (index.state === 1) {
-                        return (
+                        </>
+                    }
+
+                    {/** ====================== LEFT BOTTOM BLOCK ( COMPACT ) ====================== */}
+                    {turnstile.page_view.btn_corpse === 1 
+                      ? 
+                        <>
                           <div
-                            key={index.index}
-                            onClick={this.sendDataRightTopBlockOnServer}
+                            onClick={this.sendDataRightBottomBlockOnServer}
                             className="right-block__center-button__right-button open"
                           >
                             Тумбовый
                           </div>
-                        );
-                      } else {
-                        return (
-                          <div
-                            key={index.index}
-                            onClick={this.sendDataRightTopBlockOnServer}
-                            className="right-block__center-button__right-button"
-                          >
+                        </> 
+                      : 
+                        <>
+                        <div
+                          onClick={this.sendDataRightBottomBlockOnServer}
+                          className="right-block__center-button__right-button"
+                        >
                             Тумбовый
                           </div>
-                        );
-                      }
-                    })}
+                        </>
+                    }
                 </div>
               </div>
               <div className="right-block__bottom">
@@ -1870,7 +2020,10 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                           </div>
                           <div className="right-block__select-description__plus-price">
-                            {turnstile.page_view.model_module_list[1] !== undefined && turnstile.page_view.model_module_list[1].name === 'ep2000' && turnstile.page_view.model_module_list[1].price}
+                            {turnstile.page_view.model_module_list[1] !== undefined 
+                              && turnstile.page_view.model_module_list[1].name === 'ep2000' 
+                              && turnstile.page_view.model_module_list[1].price
+                            }
                           </div>
                           <div className="onoffswitch">
                             <input
@@ -1906,7 +2059,7 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
                               <div onClick={this.handleOpenModalOne}>
-                                подробнее
+                                ПОДРОБНЕЕ
                               </div>
                               <div className="right-block__select-description__more-info__arrow"></div>
                             </div>
@@ -1915,7 +2068,7 @@ class Turnstille extends Component {
                                 <div className="wrapper-popup">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <div></div>
+                                      <img src={module_main_photo} alt='photo1' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
@@ -1940,6 +2093,7 @@ class Turnstille extends Component {
                                       </div>
                                       <div
                                         onClick={this.handleCloseModalOne}
+
                                         className="wrapper-popup__right-block-header__close-modal"
                                       ></div>
                                     </div>
@@ -1954,12 +2108,14 @@ class Turnstille extends Component {
                                             RS-485 UART I2C Также оснащен
                                             дополнительным выходом для подключения
                                             различных исполнительных устройств.
-                                            <p>Встроенное ПО СКУД “CARDDEX IMS/AR” с
+                                          </p>
+                                          <p>Встроенное ПО СКУД “CARDDEX IMS/AR” с
                                             функцией “Учет рабочего времени”
                                             избавляет от необходимости
                                             использовать внешние серверы
                                             программного обеспечения.
-                                            </p>
+                                          </p>
+                                          <p>
                                             Низкое
                                             энергопотребление допускает
                                             подключение PoE через интерфейс связи
@@ -1981,8 +2137,8 @@ class Turnstille extends Component {
                                             по «общей шине» RS-485; подключение
                                             секции «Антипаника» с электромагнитным
                                             замком.
-                                            </p>
-                                            <p>
+                                          </p>
+                                          <p>
                                              Энергонезависимая память
                                             контроллера позволяет хранить: 10000
                                             бесконтактных ключей; 1500 отпечатков
@@ -2051,7 +2207,7 @@ class Turnstille extends Component {
                                     <div className="wrapper-popup__right-block-footer">
                                       <div className="wrapper-popup__right-block__footer__price">
                                         <span>Стоимость опции</span>
-                                        12 240,00
+                                        {module_price}
                                       </div>
                                       <div
                                         onClick={this.handleClickOneSelect}
@@ -2150,7 +2306,7 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
                               <div onClick={this.handleOpenModalTwo}>
-                                подробнее
+                                ПОДРОБНЕЕ
                               </div>
                               <div className="right-block__select-description__more-info__arrow"></div>
                             </div>
@@ -2159,7 +2315,7 @@ class Turnstille extends Component {
                                 <div className="wrapper-popup-emmarin">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <div></div>
+                                      <img src={module_main_photo} alt='photo2' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
@@ -2189,12 +2345,12 @@ class Turnstille extends Component {
                                     <div className="wrapper-popup__right-block-main">
                                       {characteristicsTwo === false ? (
                                         <div className="wrapper-popup__right-block-main__description">
-                                          Встраиваемые модули RFID считывателей
-                                          «RE-02» и «RM-02» предназначены для
+                                          Встраиваемый модуль RFID считывателей
+                                          «RE-02» предназначен для
                                           обеспечения доступа авторизованным
                                           пользователям, посредством
                                           бесконтактных идентификаторов
-                                          стандарта EMMarine/MiFare.
+                                          стандарта EMMarin
                                         </div>
                                       ) : (
                                         <div className="wrapper-popup__right-block-main__characteristics">
@@ -2223,7 +2379,7 @@ class Turnstille extends Component {
                                     <div className="wrapper-popup__right-block-footer">
                                       <div className="wrapper-popup__right-block__footer__price">
                                         <span>Стоимость опции</span>
-                                        2340,00
+                                        {module_price}
                                       </div>
                                       <div
                                         onClick={this.handleClickTwoSelect}
@@ -2326,7 +2482,7 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
                               <div onClick={this.handleOpenModalThree}>
-                                подробнее
+                                ПОДРОБНЕЕ
                               </div>
                               <div className="right-block__select-description__more-info__arrow"></div>
                             </div>
@@ -2335,7 +2491,7 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-mifare">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <div></div>
+                                    <img src={module_main_photo} alt='photo3' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -2356,12 +2512,12 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsThree === false ? (
                                       <div className="wrapper-popup__right-block-main__description">
-                                        Встраиваемые модули RFID считывателей «RE-02» и «RM-02» предназначены для обеспечения доступа авторизованным пользователям, посредством бесконтактных идентификаторов стандарта EMMarine/MiFare.
+                                        Встраиваемый модуль RFID считывателей «RM-02» предназначен для обеспечения доступа авторизованным пользователям, посредством бесконтактных идентификаторов стандарта Mifare.
                                       </div>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
                                         <div className="wrapper-popup__right-block-main__characteristics__heading">
-                                          Считыватель MiFare:
+                                          Считыватель Mifare:
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>Стандарт считывания:</div>
@@ -2387,7 +2543,7 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-footer">
                                     <div className="wrapper-popup__right-block__footer__price">
                                       <span>Стоимость опции</span>
-                                      4800,00
+                                      {module_price}
                                     </div>
                                     <div onClick={this.handleClickThreeSelect} className="wrapper-popup__right-block__footer__button">
                                       Добавить
@@ -2490,17 +2646,17 @@ class Turnstille extends Component {
                             </div>
                             {/*{index.caption}*/}
                               <div className="right-block__select-description__more-info">
-                                <div onClick={this.handleOpenModalFour}>
-                                  подробнее
+                                <div style={{marginTop: '2px'}} onClick={this.handleOpenModalFour}>
+                                  ПОДРОБНЕЕ
                                 </div>
-                                <div className="right-block__select-description__more-info__arrow"></div>
+                                <div style={{marginTop: '2px'}} className="right-block__select-description__more-info__arrow"></div>
                               </div>
                                 {/** ==================================== MODAL WINDOW ===================================== */}
                                 {this.state.modalOpenFour ? (
                                 <div className="wrapper-popup-bio">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <div></div>
+                                      <img src={module_main_photo} alt='photo4' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
@@ -2528,7 +2684,7 @@ class Turnstille extends Component {
                                         доступа через турникеты авторизованным пользователям посредством
                                         сканирования отпечатков пальцев. Также, в виде дополнительной
                                         возможности, в данные модули встроены RFID считыватели
-                                        стандартов EMMarine или MiFare.
+                                        стандартов EMMarine или Mifare.
                                         </div>
                                       ) : (
                                         <div className="wrapper-popup__right-block-main__characteristics">
@@ -2567,7 +2723,7 @@ class Turnstille extends Component {
                                     <div className="wrapper-popup__right-block-footer">
                                       <div className="wrapper-popup__right-block__footer__price">
                                         <span>Стоимость опции</span>
-                                        18000,00
+                                        {module_price}
                                       </div>
                                       <div onClick={this.handleClickFourSelect} className="wrapper-popup__right-block__footer__button">
                                         Добавить
@@ -2668,17 +2824,17 @@ class Turnstille extends Component {
                             </div>
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
-                              <div onClick={this.handleOpenModalFive}>
-                                подробнее
+                              <div style={{marginTop: '2px'}} onClick={this.handleOpenModalFive}>
+                                ПОДРОБНЕЕ
                               </div>
-                              <div className="right-block__select-description__more-info__arrow"></div>
+                              <div style={{marginTop: '2px'}} className="right-block__select-description__more-info__arrow"></div>
                             </div>
                               {/** ==================================== MODAL WINDOW ===================================== */}
                               {this.state.modalOpenFive ? (
                               <div className="wrapper-popup-time">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <div></div>
+                                    <img src={module_main_photo} alt='photo5' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -2743,7 +2899,7 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-footer">
                                     <div className="wrapper-popup__right-block__footer__price">
                                       <span>Стоимость опции</span>
-                                      21040,00
+                                      {module_price}
                                     </div>
                                     <div onClick={this.handleClickFiveSelect} className="wrapper-popup__right-block__footer__button">
                                       Добавить
@@ -2845,17 +3001,17 @@ class Turnstille extends Component {
                             </div>
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
-                              <div onClick={this.handleOpenModalSix}>
-                                подробнее
+                              <div style={{marginTop: '2px'}} onClick={this.handleOpenModalSix}>
+                                ПОДРОБНЕЕ
                               </div>
-                              <div className="right-block__select-description__more-info__arrow"></div>
+                              <div style={{marginTop: '2px'}} className="right-block__select-description__more-info__arrow"></div>
                             </div>
                               {/** ==================================== MODAL WINDOW ===================================== */}
                               {this.state.modalOpenSix ? (
                               <div className="wrapper-popup-single-visit">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <div></div>
+                                    <img src={module_main_photo} alt='photo6' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -2888,10 +3044,6 @@ class Turnstille extends Component {
                                           <div>EAN-8, EAN-13, UPC-A, UPC-E, Code 39, Code 93, Code 128, EAN128, Codabar, Industrial 2 of 5, Interleave 2 of 5, Standard 25, Matrix 2 of 5, MSI, GS1, PDF417, MicroQR, DataMatrix, QR, HanXin, Aztec</div>
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                          <div>Скорость сканирования:</div>
-                                          <div>1300 раз в секунду</div>
-                                        </div>
-                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>
                                             Минимальный процент контрастности распознаваемого текста:
                                           </div>
@@ -2921,7 +3073,7 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-footer">
                                     <div className="wrapper-popup__right-block__footer__price">
                                       <span>Стоимость опции</span>
-                                      9220,00
+                                      {module_price}
                                     </div>
                                     <div onClick={this.handleClickSixSelect} className="wrapper-popup__right-block__footer__button">
                                       Добавить
@@ -3022,17 +3174,17 @@ class Turnstille extends Component {
                             <div>Гостевой доступ по 2D штрих-кодам</div>
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
-                              <div onClick={this.handleOpenModalSeven}>
-                                подробнее
+                              <div style={{marginTop: '2px'}} onClick={this.handleOpenModalSeven}>
+                                ПОДРОБНЕЕ
                               </div>
-                              <div className="right-block__select-description__more-info__arrow"></div>
+                              <div style={{marginTop: '2px'}} className="right-block__select-description__more-info__arrow"></div>
                             </div>
                               {/** ==================================== MODAL WINDOW ===================================== */}
                               {this.state.modalOpenSeven ? (
                               <div className="wrapper-popup-guest2d">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <div></div>
+                                    <img src={module_main_photo} alt='photo7' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -3073,10 +3225,7 @@ class Turnstille extends Component {
                                           <div>Поддерживаемые стандарты:</div>
                                           <div>EAN-8, EAN-13, UPC-A, UPC-E, Code 39, Code 93, Code 128, EAN128, Codabar, Industrial 2 of 5, Interleave 2 of 5, Standard 25, Matrix 2 of 5, MSI, GS1, PDF417, MicroQR, DataMatrix, QR, HanXin, Aztec</div>
                                         </div>
-                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                          <div>Скорость сканирования:</div>
-                                          <div>1300 раз в секунду</div>
-                                        </div>
+                                        
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>
                                             Минимальный процент контрастности распознаваемого текста:
@@ -3107,7 +3256,7 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-footer">
                                     <div className="wrapper-popup__right-block__footer__price">
                                       <span>Стоимость опции</span>
-                                      20550,00 Р
+                                      {module_price}
                                     </div>
                                     <div onClick={this.handleClickSevenSelect} className="wrapper-popup__right-block__footer__button">
                                       Добавить
@@ -3211,17 +3360,17 @@ class Turnstille extends Component {
                             <div>Корпус кожуха из нержавеющей стали</div>
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
-                              <div onClick={this.handleOpenModalEight}>
-                                подробнее
+                              <div style={{marginTop: '2px'}} onClick={this.handleOpenModalEight}>
+                                ПОДРОБНЕЕ
                               </div>
-                              <div className="right-block__select-description__more-info__arrow"></div>
+                              <div style={{marginTop: '2px'}} className="right-block__select-description__more-info__arrow"></div>
                             </div>
                               {/** ==================================== MODAL WINDOW ===================================== */}
                               {this.state.modalOpenEight ? (
                               <div className="wrapper-popup-steel-case">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <div></div>
+                                    <img src={module_main_photo} alt='photo8' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -3259,7 +3408,7 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-footer">
                                     <div className="wrapper-popup__right-block__footer__price">
                                       <span>Стоимость опции</span>
-                                      3620,00
+                                      {module_price}
                                     </div>
                                     <div onClick={this.handleClickEightSelect} className="wrapper-popup__right-block__footer__button">
                                       Добавить

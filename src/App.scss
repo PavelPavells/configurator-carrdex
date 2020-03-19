@@ -3,10 +3,14 @@ html {
 }
 body, #root {
 	height: 100%;
+	overflow: hidden;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
 }
 ::-webkit-scrollbar {
-	width: 0px;
-	background: transparent;
+	display: none;
+	width: 0;
+	height: 0;
 }
 .wrapper-configurator {
   display: flex;
@@ -18,7 +22,6 @@ body, #root {
   user-select: none;
   font-weight: 100;
   height: 100%;
-  //padding: 25px;
 }
 
 //****************** GLOBAL FONTS ******************//
