@@ -1565,12 +1565,46 @@ class Turnstille extends Component {
   };
 
   handleOpenModalOne = () => {
-    this.setState({ modalOpenOne: true });
+    this.setState({ modalOpenOne: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL1",
       trigger: 5,
-	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+	    button_seria_state: this.state.button_seria_state, 
+      button_corpse_state: this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1581,12 +1615,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalTwo = () => {
-    this.setState({ modalOpenTwo: true });
+    this.setState({ modalOpenTwo: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL2",
       trigger: 6,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1597,12 +1665,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalThree = () => {
-    this.setState({ modalOpenThree: true });
+    this.setState({ modalOpenThree: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL3",
       trigger: 7,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1613,12 +1715,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalFour = () => {
-    this.setState({ modalOpenFour: true });
+    this.setState({ modalOpenFour: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL4",
       trigger: 8,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1629,12 +1765,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalFive = () => {
-    this.setState({ modalOpenFive: true });
+    this.setState({ modalOpenFive: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL5",
       trigger: 9,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1645,12 +1815,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalSix = () => {
-    this.setState({ modalOpenSix: true });
+    this.setState({ modalOpenSix: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL6",
       trigger: 10,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1661,12 +1865,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalSeven = () => {
-    this.setState({ modalOpenSeven: true });
+    this.setState({ modalOpenSeven: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL7",
       trigger: 11,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1677,12 +1915,46 @@ class Turnstille extends Component {
     .catch(err => console.log('Error: ' + err))
   };
   handleOpenModalEight = () => {
-    this.setState({ modalOpenEight: true });
+    this.setState({ modalOpenEight: true, module_main_photo: null });
     axios.post(`${site}/turnstile/module`, {
       app_id: "UUIDMODAL8",
       trigger: 12,
 	    button_seria_state : this.state.button_seria_state, 
-      button_corpse_state : this.state.button_corpse_state
+      button_corpse_state : this.state.button_corpse_state,
+      module_selectors: [
+        {
+          module: 0,
+          state: this.state.selectOne
+        },
+        {
+          module: 1,
+          state: this.state.selectTwo
+        },
+        {
+          module: 2,
+          state: this.state.selectThree
+        },
+        {
+          module: 3,
+          state: this.state.selectFour
+        },
+        {
+          module: 4,
+          state: this.state.selectFive < 0 ? 0 : this.state.selectFive
+        },
+        {
+          module: 5,
+          state: this.state.selectSix < 0 ? 0 : this.state.selectSix
+        },
+        {
+          module: 6,
+          state: this.state.selectSeven < 0 ? 0 : this.state.selectSeven
+        },
+        {
+          module: 7,
+          state: this.state.selectEight < 0 ? 0 : this.state.selectEight
+        }
+      ]
     })
     .then(data => {
       this.setState({
@@ -1788,7 +2060,7 @@ class Turnstille extends Component {
     //console.log("DATA_BTN_SERIA " + turnstile.page_view.btn_seria, "DATA_BTN_CORPSE " + turnstile.page_view.btn_corpse)
     //console.log(turnstile.page_view ? "RES_DATA_BTN_SERIA " + turnstile.page_view.btn_seria : null);
     //console.log(turnstile.page_view ? "RES_DATA_BTN_CORPSE " + turnstile.page_view.btn_corpse : null);
-    //console.log(turnstile.page_view)
+    console.log(turnstile)
     //console.log(localStorage);
     //console.log(this.state.selectOne)
     //console.log(this.state.selectTwo)
@@ -1809,12 +2081,10 @@ class Turnstille extends Component {
 
     if (error) {
       return <div>Error: {error.message}</div>;
-    } else if (!loadingData) {
-      return <Loader />;
+    } else if (!loadingData) { 
+      return (<Loader />);
     } else if(turnstile.result.code === -1 || turnstile.length === 0) { // FOR WINDOW.LOCATION ?model=(NOT FOUND)
-      return (<div>PAGE NOT FOUND</div>)
-    } else if (window.location.search === "?model=6" || turnstile === null) {
-      return (<div>CТРАНИЦА НЕ НАЙДЕНА</div>);
+      return (<div style={{fontSize: '30px'}}>СТРАНИЦА НЕ НАЙДЕНА</div>)
     } else {
       return (
         <div className="wrapper-main">
@@ -1991,6 +2261,7 @@ class Turnstille extends Component {
                         </>
                     }
                 </div>
+                <div className='right-block__bottom__more-modules'>Дополнительные модули</div>
               </div>
               <div className="right-block__bottom">
                 {/** =================== BLOCK 1 =================== */}
@@ -2068,15 +2339,17 @@ class Turnstille extends Component {
                                 <div className="wrapper-popup">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <img src={module_main_photo} alt='photo1' />
+                                      <img src={module_main_photo} alt='' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
                                     <div className="wrapper-popup__right-block-header">
                                       <div className="wrapper-popup__right-block-header__photo"></div>
                                       <div className="wrapper-popup__right-block-header__characteristics">
-                                        Универсальный сетевой контроллер
-                                        расширения<br/>EP-2000
+                                        {turnstile.page_view.module_name
+                                        ? turnstile.page_view.module_name 
+                                        :
+                                        ('Универсальный сетевой контроллер расширения EP-2000')}
                                         {characteristicsOne === false ? (
                                           <span
                                             onClick={this.toggleCharacteristicsOne}
@@ -2093,127 +2366,132 @@ class Turnstille extends Component {
                                       </div>
                                       <div
                                         onClick={this.handleCloseModalOne}
-
                                         className="wrapper-popup__right-block-header__close-modal"
                                       ></div>
                                     </div>
                                     <div className="wrapper-popup__right-block-main">
-                                      {characteristicsOne === false ? (
-                                        <div className="wrapper-popup__right-block-main__description">
-                                          <p>
-                                            Модуль расширения “EP-2000”
-                                            предназначен для расширения
-                                            функционала турникетов CARDDEX. Данный
-                                            модуль оснащен интерфейсами: Ethernet
-                                            RS-485 UART I2C Также оснащен
-                                            дополнительным выходом для подключения
-                                            различных исполнительных устройств.
-                                          </p>
-                                          <p>Встроенное ПО СКУД “CARDDEX IMS/AR” с
-                                            функцией “Учет рабочего времени”
-                                            избавляет от необходимости
-                                            использовать внешние серверы
-                                            программного обеспечения.
-                                          </p>
-                                          <p>
-                                            Низкое
-                                            энергопотребление допускает
-                                            подключение PoE через интерфейс связи
-                                            Ethernet и питания турникета по одному
-                                            стандартному кабелю «витая пара»
-                                            UTP-5, а также автономную работу от
-                                            внешнего аккумулятора 10A/ч до 24
-                                            часов.
-                                          </p>
-                                          <p> 
-                                            Широкий набор встроенных
-                                            каналов подключения позволяет:
-                                            одновременную работу с внешними
-                                            считывателями бесконтактных карт,
-                                            биометрическими сканерами отпечатков
-                                            пальцев или универсальным 2D сканером
-                                            QR —кодов; подключение до 32 дверных
-                                            контроллеров CARDDEX серии «NET-01»
-                                            по «общей шине» RS-485; подключение
-                                            секции «Антипаника» с электромагнитным
-                                            замком.
-                                          </p>
-                                          <p>
-                                             Энергонезависимая память
-                                            контроллера позволяет хранить: 10000
-                                            бесконтактных ключей; 1500 отпечатков
-                                            пальцев; 10000 QR-кодов; до 2 000 000
-                                            событий; до 500 000 событий с
-                                            фотофиксацией.
-                                          </p>
+                                      {characteristicsOne === false ?
+                                        <>
+                                        {turnstile.page_view.module_desc
+                                        ? turnstile.page_view.module_desc
+                                        : <div className="wrapper-popup__right-block-main__description">
+                                          <p>Модуль расширения “EP-2000” предназначен для расширения функционала турникетов CARDDEX.</p>
+                                          <strong>Данный модуль оснащен интерфейсами:</strong>
+                                          <ul>
+                                            <li>Ethernet;</li>
+                                            <li>RS-485;</li>
+                                            <li>UART;</li>
+                                            <li>I2C.</li>
+                                          </ul>
+                                          <p>Также оснащен дополнительным выходом для подключения различных исполнительных устройств. Встроенное ПО СКУД “CARDDEX IMS/AR” с функцией “Учет рабочего времени” избавляет от необходимости использовать внешние серверы программного обеспечения.</p>
+                                          <strong>Широкий набор встроенных каналов подключения позволяет обеспечить:</strong>
+                                          <ul>
+                                            <li>одновременную работу с внешними считывателями бесконтактных карт, биометрическими сканерами отпечатков пальцев или универсальным 2D сканером QR-кодов;</li>
+                                            <li>подключение до 32 дверных контроллеров CARDDEX по “общей шине” RS-485;</li>
+                                            <li>подключение секции “Антипаника” с электромагнитным замком.</li>
+                                          </ul>
+                                          <strong>Энергонезависимая память контроллера позволяет хранить:</strong>
+                                          <ul>
+                                            <li>50 000 бесконтактных ключей;</li>
+                                            <li>500 отпечатков пальцев;</li>
+                                            <li>5 000 QR-кодов;</li>
+                                            <li>250 000 событий;</li>
+                                          </ul>
                                         </div>
-                                      ) : (
-                                        <div className="wrapper-popup__right-block-main__characteristics">
-                                          <div className="wrapper-popup__right-block-main__characteristics__heading">
-                                            Технические характеристики:
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Напряжение питания (постоянный
-                                              ток):
+                                        }
+                                        </>
+                                       : 
+                                        <>
+                                          <div className="wrapper-popup__right-block-main__characteristics">
+                                            <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                              Технические характеристики:
                                             </div>
-                                            <div>12 V</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Максимальный потребляемый ток:
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Напряжение питания (постоянный
+                                                ток):
+                                              </div>
+                                              <div>12 V</div>
                                             </div>
-                                            <div>2,6 A</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Локальная память ключей и событий:
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Максимальный потребляемый ток:
+                                              </div>
+                                              <div>2,6 A</div>
                                             </div>
-                                            <div>
-                                              50000 ключей, 250000 событий
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Локальная память ключей:
+                                              </div>
+                                              <div>
+                                                50000 ключей
+                                              </div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Локальная память событий:
+                                              </div>
+                                              <div>
+                                                250000 ключей
+                                              </div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Локальная память отпечатков
+                                                пальцев:
+                                              </div>
+                                              <div>500</div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Локальная память штрих-кодов:
+                                              </div>
+                                              <div>5000</div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>
+                                                Интерфейсы связи с внешними
+                                                устройствами:
+                                              </div>
+                                              <div>Ethernet, RS-485, RS-232</div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>Кол-во релейных выходов:</div>
+                                              <div>1</div>
+                                            </div>
+                                            <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                              <div>Габаритные размеры:</div>
+                                              <div>120 х 100 х 35 мм</div>
                                             </div>
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Локальная память отпечатков
-                                              пальцев:
-                                            </div>
-                                            <div>500</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Локальная память штрих-кодов:
-                                            </div>
-                                            <div>5000</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Интерфейсы связи с внешними
-                                              устройствами:
-                                            </div>
-                                            <div>Ethernet, RS-485, RS-232</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Кол-во релейных выходов:</div>
-                                            <div>1</div>
-                                          </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Габаритные размеры:</div>
-                                            <div>120 х 100 х 35 мм</div>
-                                          </div>
-                                        </div>
-                                      )}
+                                        </>
+                                      }
                                     </div>
                                     <div className="wrapper-popup__right-block-footer">
                                       <div className="wrapper-popup__right-block__footer__price">
                                         <span>Стоимость опции</span>
                                         {module_price}
                                       </div>
-                                      <div
-                                        onClick={this.handleClickOneSelect}
-                                        className="wrapper-popup__right-block__footer__button"
-                                      >
-                                        Добавить
+                                      <div>
+                                        {turnstile.page_view.module_selectors[0].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickOneSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
                                       </div>
                                     </div>
                                   </div>
@@ -2272,8 +2550,9 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                           </div>
                           <div className="right-block__select-description__plus-price">
-                            {turnstile.page_view.model_module_list[1] !== undefined && turnstile.page_view.model_module_list[1].name === 'emarine' && '+' +  turnstile.page_view.model_module_list[1].price && '+ 2340.00'}
-                            {turnstile.page_view.model_module_list[2] !== undefined && turnstile.page_view.model_module_list[2].name === 'emarine' && '+' +  turnstile.page_view.model_module_list[2].price && '+ 2340.00'}
+                            {turnstile.page_view.model_module_list[0] !== undefined && turnstile.page_view.model_module_list[0].name === 'emarine' && '+' +  turnstile.page_view.model_module_list[0].price}
+                            {turnstile.page_view.model_module_list[1] !== undefined && turnstile.page_view.model_module_list[1].name === 'emarine' && '+' +  turnstile.page_view.model_module_list[1].price}
+                            {turnstile.page_view.model_module_list[2] !== undefined && turnstile.page_view.model_module_list[2].name === 'emarine' && '+' +  turnstile.page_view.model_module_list[2].price}
                           </div>
                           <div className="onoffswitch2">
                             <input
@@ -2315,14 +2594,17 @@ class Turnstille extends Component {
                                 <div className="wrapper-popup-emmarin">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <img src={module_main_photo} alt='photo2' />
+                                      <img src={module_main_photo} alt='' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
                                     <div className="wrapper-popup__right-block-header">
                                       <div className="wrapper-popup__right-block-header__photo"></div>
                                       <div className="wrapper-popup__right-block-header__characteristics">
-                                        RFID идентификаторы EMMarin 125kHZ
+                                        {turnstile.page_view.module_name
+                                        ? turnstile.page_view.module_name
+                                        : 'RFID идентификаторы EMMarin 125kHZ'
+                                        }
                                         {characteristicsTwo === false ? (
                                           <span
                                             onClick={this.toggleCharacteristicsTwo}
@@ -2344,33 +2626,39 @@ class Turnstille extends Component {
                                     </div>
                                     <div className="wrapper-popup__right-block-main">
                                       {characteristicsTwo === false ? (
-                                        <div className="wrapper-popup__right-block-main__description">
-                                          Встраиваемый модуль RFID считывателей
-                                          «RE-02» предназначен для
-                                          обеспечения доступа авторизованным
-                                          пользователям, посредством
-                                          бесконтактных идентификаторов
-                                          стандарта EMMarin
-                                        </div>
+                                        <>
+                                        {turnstile.page_view.module_desc
+                                          ? turnstile.page_view.module_desc
+                                          :                                        
+                                          <div className="wrapper-popup__right-block-main__description">
+                                            Встраиваемый модуль RFID считывателей
+                                            “RE-02” предназначен для
+                                            обеспечения доступа авторизованным
+                                            пользователям, посредством
+                                            бесконтактных идентификаторов
+                                            стандарта EMMarin
+                                          </div>
+                                        }
+                                        </>
                                       ) : (
                                         <div className="wrapper-popup__right-block-main__characteristics">
                                           <div className="wrapper-popup__right-block-main__characteristics__heading">
                                             Считыватель EMMarine:
                                           </div>
                                           <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Стандарт считывания:</div>
+                                            <div>cтандарт считывания:</div>
                                             <div>EM4100</div>
                                           </div>
                                           <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Рабочая частота:</div>
+                                            <div>рабочая частота:</div>
                                             <div>125 КГц</div>
                                           </div>
                                           <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Рабочее напряжение:</div>
+                                            <div>рабочее напряжение:</div>
                                             <div>5 В</div>
                                           </div>
                                           <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Потребляемый ток:</div>
+                                            <div>потребляемый ток:</div>
                                             <div>50 мА</div>
                                           </div>
                                         </div>
@@ -2381,11 +2669,26 @@ class Turnstille extends Component {
                                         <span>Стоимость опции</span>
                                         {module_price}
                                       </div>
-                                      <div
-                                        onClick={this.handleClickTwoSelect}
-                                        className="wrapper-popup__right-block__footer__button"
-                                      >
-                                        Добавить
+                                      <div>
+                                        {turnstile.page_view.module_selectors[1].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickTwoSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
                                       </div>
                                     </div>
                                   </div>
@@ -2396,10 +2699,10 @@ class Turnstille extends Component {
                             {/*{index.caption}*/}
                           </div>
                           <div className="right-block__select-description__plus-price">
-                            {turnstile.page_view.model_module_list[1] !== undefined && turnstile.page_view.model_module_list[1].name === 'emarine' && '+' + turnstile.page_view.model_module_list[1].price && '+ 2340.00'}
-                            {turnstile.page_view.model_module_list[2] !== undefined && turnstile.page_view.model_module_list[2].name === 'emarine' && '+' + turnstile.page_view.model_module_list[2].price && '+ 2340.00'}
-                            {turnstile.page_view.model_module_list[3] !== undefined && turnstile.page_view.model_module_list[3].name === 'emarine' && '+' + turnstile.page_view.model_module_list[3].price && '+ 2340.00'}
-                            {turnstile.page_view.model_module_list[4] !== undefined && turnstile.page_view.model_module_list[4].name === 'emarine' && '+' + turnstile.page_view.model_module_list[4].price && '+ 2340.00'}
+                            {turnstile.page_view.model_module_list[1] !== undefined && turnstile.page_view.model_module_list[1].name === 'emarine' && '+' + turnstile.page_view.model_module_list[1].price}
+                            {turnstile.page_view.model_module_list[2] !== undefined && turnstile.page_view.model_module_list[2].name === 'emarine' && '+' + turnstile.page_view.model_module_list[2].price}
+                            {turnstile.page_view.model_module_list[3] !== undefined && turnstile.page_view.model_module_list[3].name === 'emarine' && '+' + turnstile.page_view.model_module_list[3].price}
+                            {turnstile.page_view.model_module_list[4] !== undefined && turnstile.page_view.model_module_list[4].name === 'emarine' && '+' + turnstile.page_view.model_module_list[4].price}
                           </div>
                           <div className="onoffswitch2">
                             <input
@@ -2478,7 +2781,12 @@ class Turnstille extends Component {
                             className="right-block__select-description"
                           >
                             <div className="right-block__select-description__photo-three"></div>
-                            <div>RFID идентификаторы Mifare 13.56MHz</div>
+                            <div>
+                            {turnstile.page_view.module_name
+                            ? turnstile.page_view.module_name
+                            : 'RFID идентификаторы Mifare 13.56MHz'
+                            }
+                            </div>
                             {/*{index.caption}*/}
                             <div className="right-block__select-description__more-info">
                               <div onClick={this.handleOpenModalThree}>
@@ -2491,7 +2799,7 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-mifare">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <img src={module_main_photo} alt='photo3' />
+                                    <img src={module_main_photo} alt='' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
@@ -2512,7 +2820,13 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsThree === false ? (
                                       <div className="wrapper-popup__right-block-main__description">
-                                        Встраиваемый модуль RFID считывателей «RM-02» предназначен для обеспечения доступа авторизованным пользователям, посредством бесконтактных идентификаторов стандарта Mifare.
+                                      <>
+                                        {turnstile.page_view.module_desc
+                                          ? turnstile.page_view.module_desc
+                                          :
+                                        <p>Встраиваемый модуль RFID считывателей “RM-02” предназначен для обеспечения доступа авторизованным пользователям, посредством бесконтактных идентификаторов стандарта Mifare.</p>
+                                        }
+                                      </>
                                       </div>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
@@ -2520,20 +2834,20 @@ class Turnstille extends Component {
                                           Считыватель Mifare:
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                          <div>Стандарт считывания:</div>
+                                          <div>стандарт считывания:</div>
                                           <div>Mifare 1K, Mifare 4K, Mifare Ultralight</div>
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                          <div>Рабочая частота:</div>
+                                          <div>рабочая частота:</div>
                                           <div>13,56 МГц</div>
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                          <div>Рабочее напряжение:</div>
+                                          <div>рабочее напряжение:</div>
                                           <div>5В</div>
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>
-                                            Потребляемый ток:
+                                            потребляемый ток:
                                           </div>
                                           <div>{"<100 мА"}</div>
                                         </div>
@@ -2545,9 +2859,27 @@ class Turnstille extends Component {
                                       <span>Стоимость опции</span>
                                       {module_price}
                                     </div>
-                                    <div onClick={this.handleClickThreeSelect} className="wrapper-popup__right-block__footer__button">
-                                      Добавить
-                                    </div>
+                                      <div>
+                                        {turnstile.page_view.module_selectors[2].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickThreeSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -2656,14 +2988,17 @@ class Turnstille extends Component {
                                 <div className="wrapper-popup-bio">
                                   <div className="wrapper-popup__left-block">
                                     <div className="wrapper-popup__block-photo">
-                                      <img src={module_main_photo} alt='photo4' />
+                                      <img src={module_main_photo} alt='' />
                                     </div>
                                   </div>
                                   <div className="wrapper-popup__right-block">
                                     <div className="wrapper-popup__right-block-header">
                                       <div className="wrapper-popup__right-block-header__photo"></div>
                                       <div className="wrapper-popup__right-block-header__characteristics">
-                                        Биометрическая идентификация по отпечаткам пальцев
+                                        {turnstile.page_view.module_name
+                                        ? turnstile.page_view.module_name
+                                        : 'Биометрическая идентификация по отпечаткам пальцев'
+                                        }
                                         {characteristicsFour === false ? (
                                           <span onClick={this.toggleCharacteristicsFour}>ХАРАКТЕРИСТИКИ</span>
                                         ) : (
@@ -2677,46 +3012,94 @@ class Turnstille extends Component {
                                     <div className="wrapper-popup__right-block-main">
                                       {characteristicsFour === false ? (
                                         <div className="wrapper-popup__right-block-main__description">
-                                        Модуль биометрической идентификации по отпечаткам пальцев
-                                        гарантирует надежный контроль доступа на территорию для
-                                        авторизованного персонала. Встраиваемые модули биометрической
-                                        идентификации «FRE-02» и «FRM-02» предназначены для обеспечения
-                                        доступа через турникеты авторизованным пользователям посредством
-                                        сканирования отпечатков пальцев. Также, в виде дополнительной
-                                        возможности, в данные модули встроены RFID считыватели
-                                        стандартов EMMarine или Mifare.
+                                        <>
+                                          {turnstile.page_view.module_desc
+                                          ? turnstile.page_view.module_desc
+                                          :
+                                            <p>Встраиваемые модули биометрической идентификации “FRE-02” и “FRM-02” предназначены для обеспечения доступа авторизованным пользователям посредством сканирования отпечатка пальца. В данный модуль встроены RFID считыватели стандартов EMMarin или Mifare.</p>
+                                          }
+                                        </>
                                         </div>
                                       ) : (
                                         <div className="wrapper-popup__right-block-main__characteristics">
-                                          <div className="wrapper-popup__right-block-main__characteristics__heading">
-                                            Характеристили биосканеров
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Технические характеристики биосканеров
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>Тип датчика:</div>
+                                          <div>oптический</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>Разрешение, размер изображения:</div>
+                                          <div>450 dpi, 258×202 px</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            Значение коэффициента ложного распознавания:
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Тип датчика:</div>
-                                            <div>oптический</div>
+                                          <div>{"<0.001%"}</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            Напряжение питания:
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>Разрешение, размер изображения:</div>
-                                            <div>450 dpi, 258×202 px</div>
+                                          <div>3,6B</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            Потребляемый ток:
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Значение коэффициента ложного отказа в обслуживании:
-                                            </div>
-                                            <div>{"<0.001%"}</div>
+                                          <div>{"<130мА"}</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Технические характеристики считывателей
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель EMMarin:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>EM4100</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>125КГц</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Значение коэффициента ложного отказа в обслуживании:
-                                            </div>
-                                            <div>{"<0.1%"}</div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
                                           </div>
-                                          <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
-                                            <div>
-                                              Потребляемый ток:
-                                            </div>
-                                            <div>{"<130мА"}</div>
+                                          <div>50мА</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель Mifire:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>Mifare 1K, Mifare 4K, Mifare Ultralight.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>13,56 МГц.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
                                           </div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
+                                          </div>
+                                          <div>{'<100мА'}</div>
+                                        </div>
                                         </div>
                                       )}
                                     </div>
@@ -2725,8 +3108,26 @@ class Turnstille extends Component {
                                         <span>Стоимость опции</span>
                                         {module_price}
                                       </div>
-                                      <div onClick={this.handleClickFourSelect} className="wrapper-popup__right-block__footer__button">
-                                        Добавить
+                                      <div>
+                                        {turnstile.page_view.module_selectors[3].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickFourSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
                                       </div>
                                     </div>
                                   </div>
@@ -2834,14 +3235,17 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-time">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <img src={module_main_photo} alt='photo5' />
+                                    <img src={module_main_photo} alt='' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
                                   <div className="wrapper-popup__right-block-header">
                                     <div className="wrapper-popup__right-block-header__photo"></div>
                                     <div className="wrapper-popup__right-block-header__characteristics">
-                                      Информационный дисплей учета рабочего времени
+                                      {turnstile.page_view.module_name
+                                      ? turnstile.page_view.module_name
+                                      : 'Информационный дисплей учета рабочего времени'
+                                      }
                                       {characteristicsFive === false ? (
                                         <span onClick={this.toggleCharacteristicsFive}>ХАРАКТЕРИСТИКИ</span>
                                       ) : (
@@ -2854,18 +3258,26 @@ class Turnstille extends Component {
                                   </div>
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsFive === false ? (
-                                      <div className="wrapper-popup__right-block-main__description">
-                                        Модули учета рабочего времени «TRE-05» и «TRM-05» предназначены для организации контроля доступа и учета рабочего времени персонала.
-                                        Интегрированный в панель идентификации дисплей отображает: 
-                                        Ф.И.О. сотрудника;
-                                        время его прихода на работу.
-                                        Встроенное ПО «CARDDEX IMS/AR» позволяет развернуть полноценную систему учета рабочего времени и контроля доступа, без дополнительного выделенного сервера.
-                                        Идентификация пользователей происходит посредством биометрического сканера или RFID считывателя.
-                                      </div>
+                                      <>
+                                      {turnstile.page_view.module_desc
+                                      ? turnstile.page_view.module_desc
+                                      :
+                                        <div className="wrapper-popup__right-block-main__description">
+                                          <p>Модули учета рабочего времени “TRE-05” и “TRM-05” предназначены для организации контроля доступа и учета рабочего времени персонала.</p>
+                                          <strong>Интегрированный в панель идентификации дисплей отображает:</strong>
+                                          <ul>
+                                            <li>Ф.И.О. сотрудника;</li>
+                                            <li>время его прихода на работу.</li>
+                                          </ul>
+                                          Встроенное ПО “CARDDEX IMS/AR” позволяет развернуть полноценную систему учета рабочего времени и контроля доступа, без дополнительного выделенного сервера.
+                                          Идентификация пользователей происходит посредством биометрического сканера или RFID считывателя.
+                                        </div>
+                                        }
+                                      </>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
                                         <div className="wrapper-popup__right-block-main__characteristics__heading">
-                                          Характеристили модуля учета рабочего времени
+                                          Технические характеристики биосканеров
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>Тип датчика:</div>
@@ -2893,6 +3305,55 @@ class Turnstille extends Component {
                                           </div>
                                           <div>{"<130мА"}</div>
                                         </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Технические характеристики считывателей
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель EMMarin:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>EM4100</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>125КГц</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
+                                          </div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
+                                          </div>
+                                          <div>50мА</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель Mifire:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>Mifare 1K, Mifare 4K, Mifare Ultralight.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>13,56 МГц.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
+                                          </div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
+                                          </div>
+                                          <div>{'<100мА'}</div>
+                                        </div>
                                       </div>
                                     )}
                                   </div>
@@ -2901,9 +3362,27 @@ class Turnstille extends Component {
                                       <span>Стоимость опции</span>
                                       {module_price}
                                     </div>
-                                    <div onClick={this.handleClickFiveSelect} className="wrapper-popup__right-block__footer__button">
-                                      Добавить
-                                    </div>
+                                    <div>
+                                        {turnstile.page_view.module_selectors[4].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickFiveSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -3011,14 +3490,17 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-single-visit">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <img src={module_main_photo} alt='photo6' />
+                                    <img src={module_main_photo} alt='' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
                                   <div className="wrapper-popup__right-block-header">
                                     <div className="wrapper-popup__right-block-header__photo"></div>
                                     <div className="wrapper-popup__right-block-header__characteristics">
-                                      Контроль разовых посещений по 2D штрих-кодам
+                                      {turnstile.page_view.module_name
+                                      ? turnstile.page_view.module_name
+                                      : 'Контроль разовых посещений по 2D штрих-кодам'
+                                      }
                                       {characteristicsSix === false ? (
                                         <span onClick={this.toggleCharacteristicsSix}>ХАРАКТЕРИСТИКИ</span>
                                       ) : (
@@ -3032,7 +3514,13 @@ class Turnstille extends Component {
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsSix === false ? (
                                       <div className="wrapper-popup__right-block-main__description">
-                                        Модуль билетного доступа по QR-кодам «QS-03» используется в турникетах для контроля доступа в кинотеатры, музеи,выставочные центры, спортивные мероприятия и т.д. В качестве устройства идентификации используется 2D сканер. Данное решение предназначено для разового прохода посетителей по приглашению, пропуску или билету, смартфону, содержащему QR-код.
+                                      <>
+                                      {turnstile.page_view.module_desc
+                                        ? turnstile.page_view.module_desc
+                                        :
+                                        <p>Модуль билетного доступа по QR-кодам “QS-03” используется в турникетах для контроля доступа в кинотеатры, музеи,выставочные центры, спортивные мероприятия и т.д. В качестве устройства идентификации используется 2D сканер. Данное решение предназначено для разового прохода посетителей по приглашению, пропуску или билету, смартфону, содержащему QR-код.</p>
+                                      }
+                                      </>
                                       </div>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
@@ -3042,6 +3530,12 @@ class Turnstille extends Component {
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>Поддерживаемые стандарты:</div>
                                           <div>EAN-8, EAN-13, UPC-A, UPC-E, Code 39, Code 93, Code 128, EAN128, Codabar, Industrial 2 of 5, Interleave 2 of 5, Standard 25, Matrix 2 of 5, MSI, GS1, PDF417, MicroQR, DataMatrix, QR, HanXin, Aztec</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            Скорость сканирования:
+                                          </div>
+                                          <div>1300 раз в секунду</div>
                                         </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>
@@ -3075,9 +3569,27 @@ class Turnstille extends Component {
                                       <span>Стоимость опции</span>
                                       {module_price}
                                     </div>
-                                    <div onClick={this.handleClickSixSelect} className="wrapper-popup__right-block__footer__button">
-                                      Добавить
-                                    </div>
+                                    <div>
+                                        {turnstile.page_view.module_selectors[5].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickSixSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -3184,14 +3696,17 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-guest2d">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <img src={module_main_photo} alt='photo7' />
+                                    <img src={module_main_photo} alt='' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
                                   <div className="wrapper-popup__right-block-header">
                                     <div className="wrapper-popup__right-block-header__photo"></div>
                                     <div className="wrapper-popup__right-block-header__characteristics">
-                                      Гостевой доступ по 2D штрих-кодам
+                                      {turnstile.page_view.module_name
+                                      ? turnstile.page_view.module_name
+                                      : 'Гостевой доступ по 2D штрих-кодам'
+                                      }
                                       {characteristicsSeven === false ? (
                                         <span onClick={this.toggleCharacteristicsSeven}>ХАРАКТЕРИСТИКИ</span>
                                       ) : (
@@ -3204,18 +3719,24 @@ class Turnstille extends Component {
                                   </div>
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsSeven === false ? (
-                                      <div className="wrapper-popup__right-block-main__description">
-                                        Модули гостевого доступа по QR-кодам «QRE-04» и «QRM-04»
-                                        предназначены для использования в турникетах, расположенных на
-                                        различных объектах, где наряду с доступом авторизованных
-                                        пользователей, предусмотрен доступ сторонних посетителей. В
-                                        данном случае, гостевой доступ осуществляется посредством
-                                        считывания QR-кодов со смартфонов посетителей или с бумажных
-                                        носителей, распечатанных и выданных на проходной. Данное решение
-                                        является альтернативой устаревшей системы использования
-                                        картоприемников для гостевого доступа и имеет ряд существенных
-                                        плюсов, как по функционалу, так и по стоимости.
-                                      </div>
+                                      <>
+                                        {turnstile.page_view.module_desc
+                                        ? turnstile.page_view.module_desc
+                                        :
+                                          <div className="wrapper-popup__right-block-main__description">
+                                            Модули гостевого доступа по QR-кодам “QRE-04” и “QRM-04”
+                                            предназначены для использования в турникетах, расположенных на
+                                            различных объектах, где наряду с доступом авторизованных
+                                            пользователей, предусмотрен доступ сторонних посетителей. В
+                                            данном случае, гостевой доступ осуществляется посредством
+                                            считывания QR-кодов со смартфонов посетителей или с бумажных
+                                            носителей, распечатанных и выданных на проходной. Данное решение
+                                            является альтернативой устаревшей системы использования
+                                            картоприемников для гостевого доступа и имеет ряд существенных
+                                            плюсов, как по функционалу, так и по стоимости.
+                                          </div>
+                                        }
+                                      </>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
                                         <div className="wrapper-popup__right-block-main__characteristics__heading">
@@ -3225,7 +3746,12 @@ class Turnstille extends Component {
                                           <div>Поддерживаемые стандарты:</div>
                                           <div>EAN-8, EAN-13, UPC-A, UPC-E, Code 39, Code 93, Code 128, EAN128, Codabar, Industrial 2 of 5, Interleave 2 of 5, Standard 25, Matrix 2 of 5, MSI, GS1, PDF417, MicroQR, DataMatrix, QR, HanXin, Aztec</div>
                                         </div>
-                                        
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            Скорость сканирования:
+                                          </div>
+                                          <div>1300 раз в секунду</div>
+                                        </div>
                                         <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
                                           <div>
                                             Минимальный процент контрастности распознаваемого текста:
@@ -3250,6 +3776,55 @@ class Turnstille extends Component {
                                           </div>
                                           <div>{'<200мА'}</div>
                                         </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Технические характеристики считывателей
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель EMMarin:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>EM4100</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>125КГц</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
+                                          </div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
+                                          </div>
+                                          <div>50мА</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__heading">
+                                          Считыватель Mifire:
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>стандарт считывания:</div>
+                                          <div>Mifare 1K, Mifare 4K, Mifare Ultralight.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>рабочая частота:</div>
+                                          <div>13,56 МГц.</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            рабочее напряжение
+                                          </div>
+                                          <div>5В</div>
+                                        </div>
+                                        <div className="wrapper-popup__right-block-main__characteristics__wrapper-options">
+                                          <div>
+                                            потребляемый ток:
+                                          </div>
+                                          <div>{'<100мА'}</div>
+                                        </div>
                                       </div>
                                     )}
                                   </div>
@@ -3258,9 +3833,27 @@ class Turnstille extends Component {
                                       <span>Стоимость опции</span>
                                       {module_price}
                                     </div>
-                                    <div onClick={this.handleClickSevenSelect} className="wrapper-popup__right-block__footer__button">
-                                      Добавить
-                                    </div>
+                                      <div>
+                                        {turnstile.page_view.module_selectors[6].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickSevenSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -3370,14 +3963,17 @@ class Turnstille extends Component {
                               <div className="wrapper-popup-steel-case">
                                 <div className="wrapper-popup__left-block">
                                   <div className="wrapper-popup__block-photo">
-                                    <img src={module_main_photo} alt='photo8' />
+                                    <img src={module_main_photo} alt='' />
                                   </div>
                                 </div>
                                 <div className="wrapper-popup__right-block">
                                   <div className="wrapper-popup__right-block-header">
                                     <div className="wrapper-popup__right-block-header__photo"></div>
                                     <div className="wrapper-popup__right-block-header__characteristics">
-                                      Корпус кожуха из нержавеющей стали
+                                      {turnstile.page_view.module_name
+                                      ? turnstile.page_view.module_name
+                                      : 'Корпус кожуха из нержавеющей стали'
+                                      }
                                       {characteristicsEight === false ? (
                                         <span onClick={this.toggleCharacteristicsEight}>ХАРАКТЕРИСТИКИ</span>
                                       ) : (
@@ -3390,9 +3986,15 @@ class Turnstille extends Component {
                                   </div>
                                   <div className="wrapper-popup__right-block-main">
                                     {characteristicsEight === false ? (
+                                      <>
+                                      {turnstile.page_view.module_desc
+                                      ? turnstile.page_view.module_desc
+                                      :
                                       <div className="wrapper-popup__right-block-main__description">
-                                        Корпус кожуха из нержавеющей стали увеличивает срок службы турниектов в помещениях с неблагоприятной окружающей средой
+                                        <p>Корпус кожуха из нержавеющей стали увеличивает срок службы турниектов в помещениях с неблагоприятной окружающей средой</p>
                                       </div>
+                                      }
+                                      </>
                                     ) : (
                                       <div className="wrapper-popup__right-block-main__characteristics">
                                         <div className="wrapper-popup__right-block-main__characteristics__heading">
@@ -3410,9 +4012,27 @@ class Turnstille extends Component {
                                       <span>Стоимость опции</span>
                                       {module_price}
                                     </div>
-                                    <div onClick={this.handleClickEightSelect} className="wrapper-popup__right-block__footer__button">
-                                      Добавить
-                                    </div>
+                                      <div>
+                                        {turnstile.page_view.module_selectors[7].state === 1
+                                          ? 
+                                          <>
+                                            <div
+                                              className="disabled_button"
+                                            >
+                                              Добавить
+                                            </div>
+                                            </>
+                                          : 
+                                          <>
+                                            <div
+                                              onClick={this.handleClickEightSelect}
+                                              className="wrapper-popup__right-block__footer__button"
+                                            >
+                                              Добавить
+                                            </div>
+                                          </>
+                                        }
+                                      </div>
                                   </div>
                                 </div>
                               </div>
